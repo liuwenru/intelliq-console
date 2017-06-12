@@ -15,17 +15,13 @@ import org.apache.log4j.Logger;
  */
 public class RedisClusterTestUtil {
     private static Logger logger=Logger.getLogger(RedisClusterTestUtil.class);
+    private static JedisCluster jedisCluster=null;
+    private static int COUNT=10000;
     static {
         logger.debug("#######################################################");
     }
-    public static void doPerTest(){
+    public static void init(){
         Set<HostAndPort> jedisClusterNodes=new HashSet<HostAndPort>();
-//        jedisClusterNodes.add(new HostAndPort("192.168.206.121",6379));
-//        jedisClusterNodes.add(new HostAndPort("192.168.206.122",6379));
-//        jedisClusterNodes.add(new HostAndPort("192.168.206.123",6379));
-//        jedisClusterNodes.add(new HostAndPort("192.168.206.124",6379));
-//        jedisClusterNodes.add(new HostAndPort("192.168.206.125",6379));
-//        jedisClusterNodes.add(new HostAndPort("192.168.206.126",6379));
         jedisClusterNodes.add(new HostAndPort("192.168.206.134",6379));
         jedisClusterNodes.add(new HostAndPort("192.168.206.136",6379));
         jedisClusterNodes.add(new HostAndPort("192.168.206.137",6379));
@@ -33,9 +29,13 @@ public class RedisClusterTestUtil {
         config.setMaxTotal(1000);
         config.setMaxIdle(100);
         config.setTestOnBorrow(true);
-        JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes,config);
+        jedisCluster = new JedisCluster(jedisClusterNodes,config);
+    }
+    public static void doSetPer(){
+        if (RedisClusterTestUtil.jedisCluster==null){
+            RedisClusterTestUtil.init();
+        }
         long start=System.currentTimeMillis();
-        int COUNT=100000;
         for (int i =0;i<COUNT;i++){
             if ((COUNT%10000)==0){
                 logger.debug("Success.........."+(i*1.0/COUNT)*100+" %");
@@ -45,32 +45,26 @@ public class RedisClusterTestUtil {
             jedisCluster.set(key,value.toString());
         }
         long end=System.currentTimeMillis();
-        logger.debug("----------------------------------------------------------");
-        logger.debug("set "+ COUNT+" keys"+(end-start) );
-        logger.debug("----------------------------------------------------------");
+        logger.info("----------------------------------------------------------");
+        logger.info("set "+ COUNT+" keys"+(end-start) );
+        logger.info("----------------------------------------------------------");
     }
 
     public static void doGetPer(){
-        Set<HostAndPort> jedisClusterNodes=new HashSet<HostAndPort>();
-        jedisClusterNodes.add(new HostAndPort("192.168.206.134",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.136",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.137",6379));
-        JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxTotal(1000);
-        config.setMaxIdle(100);
-        config.setTestOnBorrow(true);
-        JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes,config);
+        if (RedisClusterTestUtil.jedisCluster==null){
+            RedisClusterTestUtil.init();
+        }
         long start=System.currentTimeMillis();
-        int COUNT=100000;
         for (int i =0;i<COUNT;i++){
-            if ((COUNT%10000)==0){
+            if ((COUNT%1000)==0){
                 logger.debug("Success.........."+(i*1.0/COUNT)*100+" %");
             }
            jedisCluster.get(Integer.toString(i));
         }
         long end=System.currentTimeMillis();
-        logger.debug("----------------------------------------------------------");
-        logger.debug("set "+ COUNT+" keys"+(end-start) );
-        logger.debug("----------------------------------------------------------");
+        logger.info("----------------------------------------------------------");
+        logger.info("set "+ COUNT+" keys"+(end-start) );
+        logger.info("----------------------------------------------------------");
     }
+
 }

@@ -12,9 +12,9 @@ public class PerTestMain {
         }
         if (args[0].equals("set")){
             if (args[1].equals("cluster")){
-                RedisClusterTestUtil.doPerTest();
+                RedisClusterTestUtil.doSetPer();
             } else{
-                RedisTestUtil.doPerTest();
+                RedisTestUtil.doSetPer();
             }
         }else {
             if (args[1].equals("cluster")){
