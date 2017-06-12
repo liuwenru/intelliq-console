@@ -29,7 +29,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>Apps</mainClass>
+                  <mainClass>RedisTest.PerTestMain</mainClass>
                 </transformer>
               </transformers>
             </configuration>
