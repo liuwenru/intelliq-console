@@ -2,6 +2,7 @@ package RedisTest;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.HashSet;
@@ -29,7 +30,7 @@ public class RedisClusterTestUtil {
         config.setMaxTotal(1000);
         config.setMaxIdle(100);
         config.setTestOnBorrow(true);
-        JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes, 5000,5000,5000,"Gepoint", config);
+        JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes,config);
         long start=System.currentTimeMillis();
         int COUNT=100000;
         for (int i =0;i<COUNT;i++){
@@ -37,7 +38,12 @@ public class RedisClusterTestUtil {
                 logger.debug("Success.........."+(i*1.0/COUNT)*100+" %");
             }
             String uuid=UUID.randomUUID().toString();
-            jedisCluster.set(uuid,uuid);
+            String key=uuid;
+            StringBuffer value=new StringBuffer(uuid);
+            value.append(uuid);
+            value.append(uuid);
+            value.append(uuid);
+            jedisCluster.set(key,value.toString());
         }
         long end=System.currentTimeMillis();
         logger.debug("----------------------------------------------------------");
