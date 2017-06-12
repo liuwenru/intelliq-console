@@ -6,14 +6,24 @@ public class PerTestMain {
     private static Logger logger=Logger.getLogger(RedisTestUtil.class);
     public static void main(String[] args){
 
-        if (args.length!=1){
-            logger.error("please give paraments 【cluster|signal】");
+        if (args.length!=2){
+            logger.error("please give paraments [get|set] 【cluster|signal】");
             return;
         }
-        if (args[0].equals("cluster")){
-            RedisClusterTestUtil.doPerTest();
+        if (args[0].equals("set")){
+            if (args[1].equals("cluster")){
+                RedisClusterTestUtil.doPerTest();
+            } else{
+                RedisTestUtil.doPerTest();
+            }
         }else {
-            RedisTestUtil.doPerTest();
+            if (args[1].equals("cluster")){
+                RedisClusterTestUtil.doGetPer();
+            }else {
+                RedisTestUtil.doGetPer();
+            }
+
+
         }
 
     }
