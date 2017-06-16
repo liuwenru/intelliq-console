@@ -16,6 +16,8 @@ public class RedisSingleThread extends Thread {
     private static int COUNT=1000; //每个线程插入的个数
     private static int bytescount=2;//生成的字节大小  36b*bytescount
     private int threadnum=0;//线程编号
+    private String[] keys=null;
+    private String modle="set";  //测试的模式
     public static void init(){
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(1000);
@@ -26,13 +28,21 @@ public class RedisSingleThread extends Thread {
             logger.debug("set key and value size:"+System.getenv("bytecount"));
             bytescount=Integer.parseInt(System.getenv("bytecount"));
         }
-
     }
     public RedisSingleThread(int threadnum){
         this.threadnum=threadnum;
+        this.keys=new String[COUNT];
+        this.modle=System.getenv("testmodle");
     }
     @Override
     public void run() {
+        if (this.modle.equals("set")){
+            this.doSetPer();
+        }else {
+            this.doGetPer();
+        }
+    }
+    public  void doSetPer(){
         Jedis jedis=pool.getResource();
         if (RedisSingleThread.pool==null){
             //防止没有初始化
@@ -53,10 +63,30 @@ public class RedisSingleThread extends Thread {
                 key=key.append(uuid);
             }
             jedis.set(key.toString(),key.toString());
+            keys[i%COUNT]=key.toString();
         }
         long end=System.currentTimeMillis();
         logger.info("------------------Single-------SET---------------------------------");
         logger.info("set "+ COUNT+" keys"+(end-start) +"毫秒");
         logger.info("------------------Single-------SET---------------------------------");
+    }
+
+    public void doGetPer(){
+        //测试Get方法
+        Jedis jedis=pool.getResource();
+        if (RedisSingleThread.pool==null){
+            //防止没有初始化
+            logger.error("不应该跑这个代码");
+            RedisSingleThread.init();
+        }
+        this.doSetPer();
+        long start=System.currentTimeMillis();
+        for(int i=0;i<this.keys.length;i++){
+            jedis.get(keys[i]);
+        }
+        long end=System.currentTimeMillis();
+        logger.info("-------------------Single----GET-----------------------------------");
+        logger.info("get "+COUNT+" keys"+(end-start)+"毫秒");
+        logger.info("-------------------Single----GET-----------------------------------");
     }
 }

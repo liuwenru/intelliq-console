@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class MultThreadTest {
     private static Logger logger=Logger.getLogger(MultThreadTest.class);
-    private static int threadcount=4;
+    private static int threadcount=8;
     public static void main(String[] args) throws InterruptedException {
 
         if (args.length!=2){
@@ -40,7 +40,7 @@ public class MultThreadTest {
                     clusterPerTestlist.get(i).join();
                 }
                 long end=System.currentTimeMillis();
-                logger.info("*******"+(end-start)+"*******");
+                logger.info("***Set Cluster****"+(end-start)+"*******");
             } else{
                 logger.info("测试多线程单实例模式Set");
                 for (int i=0;i<MultThreadTest.threadcount;i++){
@@ -51,13 +51,31 @@ public class MultThreadTest {
                     singlePerTestlist.get(i).join();
                 }
                 long end=System.currentTimeMillis();
-                logger.info("*******"+(end-start)+"*******");
+                logger.info("***Set Single****"+(end-start)+"*******");
             }
         }else {
             if (args[1].equals("cluster")){
-                RedisClusterTestUtil.doGetPer();
-            }else {
-                RedisTestUtil.doGetPer();
+                logger.info("测试多线程集群模式Get");
+                for (int i=0;i<MultThreadTest.threadcount;i++){
+                    clusterPerTestlist.get(i).start();
+                    //clusterPerTestlist.get(i).join();
+                }
+                for (int i=0;i<MultThreadTest.threadcount;i++){
+                    clusterPerTestlist.get(i).join();
+                }
+                long end=System.currentTimeMillis();
+                logger.info("***Get Cluster****"+(end-start)+"*******");
+            } else{
+                logger.info("测试多线程单实例模式Get");
+                for (int i=0;i<MultThreadTest.threadcount;i++){
+                    singlePerTestlist.get(i).start();
+                    //singlePerTestlist.get(i).join();
+                }
+                for (int i=0;i<MultThreadTest.threadcount;i++){
+                    singlePerTestlist.get(i).join();
+                }
+                long end=System.currentTimeMillis();
+                logger.info("***Get Single****"+(end-start)+"*******");
             }
         }
 
