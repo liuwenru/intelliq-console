@@ -6,24 +6,23 @@ import java.util.ArrayList;
 
 /**
  * Created by ijarvis on 2017/6/15.
+ * Redis多线程测试启动类
  */
 public class MultThreadTest {
     private static Logger logger=Logger.getLogger(MultThreadTest.class);
     private static int threadcount=8;
     public static void main(String[] args) throws InterruptedException {
-
         if (args.length!=2){
             logger.error("please give paraments [get|set] 【cluster|signal】");
             return;
         }
         //初始化连接的东西
-        RedisClusterThread.init();
+        //RedisClusterThread.init();
         RedisSingleThread.init();
         ArrayList<RedisClusterThread> clusterPerTestlist=new ArrayList<>();
         for (int i=0;i<MultThreadTest.threadcount;i++){
             clusterPerTestlist.add(new RedisClusterThread(i));
         }
-
         ArrayList<RedisSingleThread> singlePerTestlist=new ArrayList<>();
         for (int i=0;i<MultThreadTest.threadcount;i++){
             singlePerTestlist.add(new RedisSingleThread(i));

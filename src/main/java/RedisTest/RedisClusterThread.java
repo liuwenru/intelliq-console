@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class RedisClusterThread extends Thread {
     private static Logger logger=Logger.getLogger(RedisClusterThread.class);
-    private static JedisCluster jedisCluster=null;
+    private JedisCluster jedisCluster=null;
     private static int COUNT=1000; //每个线程插入的个数
     private static int bytescount=2;//生成的字节大小  36b*bytescount
     private int threadnum=0; //线程编号
@@ -26,9 +26,14 @@ public class RedisClusterThread extends Thread {
         this.threadnum=num;
         this.keys=new String[COUNT];
         this.modle=System.getenv("testmodle");
+        this.init();
+        if (this.modle.equals("get")){
+            //如果是测试Set模式则先初始化数据
+            this.doSetPer();
+        }
     }
-    public static void init(){
-        //初始化连接池等信息
+    public  void init(){
+        //初始化连接池等信息,方便修改
         Set<HostAndPort> jedisClusterNodes=new HashSet<HostAndPort>();
         jedisClusterNodes.add(new HostAndPort("192.168.206.121",6379));
         jedisClusterNodes.add(new HostAndPort("192.168.206.122",6379));
@@ -45,7 +50,6 @@ public class RedisClusterThread extends Thread {
             logger.debug("set key and value size:"+System.getenv("bytecount"));
             bytescount=Integer.parseInt(System.getenv("bytecount"));
         }
-
     }
     @Override
     public void run() {
@@ -58,10 +62,10 @@ public class RedisClusterThread extends Thread {
 
     public void doSetPer(){
         //测试Set方法
-        if (RedisClusterThread.jedisCluster==null){
+        if (this.jedisCluster==null){
             //防止没有初始化
             logger.error("不应该跑这个代码");
-            RedisClusterThread.init();
+            this.init();
         }
         long start=System.currentTimeMillis();
         int startkey=this.threadnum*1000;
@@ -86,12 +90,11 @@ public class RedisClusterThread extends Thread {
     }
     public void doGetPer(){
         //测试Get方法
-        if (RedisClusterThread.jedisCluster==null){
+        if (this.jedisCluster==null){
             //防止没有初始化
             logger.error("不应该跑这个代码");
-            RedisClusterThread.init();
+            this.init();
         }
-        this.doSetPer();
         long start=System.currentTimeMillis();
         for(int i=0;i<this.keys.length;i++){
             jedisCluster.get(keys[i]);
