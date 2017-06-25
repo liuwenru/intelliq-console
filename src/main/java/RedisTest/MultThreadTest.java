@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class MultThreadTest {
     private static Logger logger=Logger.getLogger(MultThreadTest.class);
-    private static int threadcount=8;
+    private static int threadcount=64;
     public static void main(String[] args) throws InterruptedException {
         if (args.length!=2){
             logger.error("please give paraments [get|set] 【cluster|signal】");

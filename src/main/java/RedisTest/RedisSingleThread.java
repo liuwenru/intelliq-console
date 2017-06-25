@@ -23,11 +23,12 @@ public class RedisSingleThread extends Thread {
         config.setMaxTotal(1000);
         config.setMaxIdle(100);
         config.setTestOnBorrow(true);
-        pool = new JedisPool(config,"192.168.206.247",6379);
+        pool = new JedisPool(config,"192.168.212.21",6379,5000,"Gepoint");
         if (System.getenv("bytecount")!=null){
             logger.debug("set key and value size:"+System.getenv("bytecount"));
             bytescount=Integer.parseInt(System.getenv("bytecount"));
         }
+
     }
     public RedisSingleThread(int threadnum){
         this.threadnum=threadnum;
@@ -88,5 +89,6 @@ public class RedisSingleThread extends Thread {
         logger.info("-------------------Single----GET-----------------------------------");
         logger.info("get "+COUNT+" keys"+(end-start)+"毫秒");
         logger.info("-------------------Single----GET-----------------------------------");
+//        jedis.close();
     }
 }

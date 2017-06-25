@@ -35,12 +35,12 @@ public class RedisClusterThread extends Thread {
     public  void init(){
         //初始化连接池等信息,方便修改
         Set<HostAndPort> jedisClusterNodes=new HashSet<HostAndPort>();
-        jedisClusterNodes.add(new HostAndPort("192.168.206.121",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.122",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.123",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.124",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.125",6379));
-        jedisClusterNodes.add(new HostAndPort("192.168.206.126",6379));
+        jedisClusterNodes.add(new HostAndPort("192.168.212.21",7001));
+        jedisClusterNodes.add(new HostAndPort("192.168.212.21",7002));
+        jedisClusterNodes.add(new HostAndPort("192.168.212.22",7001));
+        jedisClusterNodes.add(new HostAndPort("192.168.212.22",7002));
+        jedisClusterNodes.add(new HostAndPort("192.168.212.23",7001));
+        jedisClusterNodes.add(new HostAndPort("192.168.212.23",7002));
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(1000);
         config.setMaxIdle(100);
