@@ -44,6 +44,7 @@ public class AppTest {
         fileoutput.write(result);
         fileoutput.close();
     }
+    @Ignore
     @Test
     public void TestTracker() throws IOException, MyException {
         //测试一下基本的获取一些关于存储的信息相关

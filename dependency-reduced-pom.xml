@@ -29,7 +29,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>Java2ShellTest</mainClass>
+                  <mainClass>Apps</mainClass>
                 </transformer>
               </transformers>
             </configuration>
