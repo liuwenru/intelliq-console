@@ -27,8 +27,8 @@ public class Apps {
             bytes[i]=probyte;
         }
         int j=0;
-        while (true){
 
+        while (true){
             long start=System.currentTimeMillis();
             String[] fileid=storageClient.upload_file(bytes,"txt",null);
             long end=System.currentTimeMillis();

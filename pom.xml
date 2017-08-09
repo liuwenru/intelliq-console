@@ -28,6 +28,11 @@
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>intelliq-console</finalName>
@@ -58,7 +63,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>MyApps</mainClass>
+                                    <mainClass>Apps</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
