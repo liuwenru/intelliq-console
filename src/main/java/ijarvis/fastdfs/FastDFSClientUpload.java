@@ -1,4 +1,4 @@
-/*
+package ijarvis.fastdfs;/*
     实现FastDFS上传测试
     useage:
         java -jar xxxx.jar client_config_file_path per_send_count[kb]

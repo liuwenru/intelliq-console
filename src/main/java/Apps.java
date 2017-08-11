@@ -1,3 +1,4 @@
+import ijarvis.fastdfs.FastDFSClientUpload;
 import org.apache.log4j.Logger;
 /**
  * Created by ijarvis on 2017/5/17.
@@ -17,10 +18,9 @@ public class Apps {
                 // Test Upload........
                 logger.info("Test Upload ");
                 FastDFSClientUpload.FastDFSClientUploadTest(args[1],args[2]);
-
             }else {
                 logger.info("Test Download ");
-                
+
 
             }
 
