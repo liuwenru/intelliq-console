@@ -1,5 +1,12 @@
 import ijarvis.fastdfs.FastDFSClientUpload;
 import org.apache.log4j.Logger;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.util.zip.GZIPInputStream;
+
 /**
  * Created by ijarvis on 2017/5/17.
  实现FastDFS下载测试
@@ -16,9 +23,17 @@ public class Apps {
         try{
             if (args[0].equals("1")){
                 // Test Upload........
+                Socket client = new Socket("192.168.149.150", 22);
+                client.getInputStream();
                 logger.info("Test Upload ");
-                FastDFSClientUpload.FastDFSClientUploadTest(args[1],args[2]);
+                //FastDFSClientUpload.FastDFSClientUploadTest(args[1],args[2]);
             }else {
+                InputStream urlStream = new GZIPInputStream(null);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlStream,"gb2312"));
+                String line = "";
+                while((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
                 logger.info("Test Download ");
 
 
