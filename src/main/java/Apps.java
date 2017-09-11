@@ -36,8 +36,8 @@ public class Apps {
         c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.209.113");
-        factory.setPort(5671);
+        factory.setHost("192.168.206.72");
+        factory.setPort(5672);
         factory.useSslProtocol(c);
         factory.setUsername("epoint");
         factory.setPassword("epoint");
