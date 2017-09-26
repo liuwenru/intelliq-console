@@ -8,58 +8,60 @@ import com.rabbitmq.client.GetResponse;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 
 public class Apps {
     public static Logger logger=Logger.getLogger(Apps.class);
     public static void  main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException, TimeoutException {
-        char[] keyPassphrase = "p@ssw0rd".toCharArray();
-        KeyStore ks = KeyStore.getInstance("PKCS12");
-        ks.load(new FileInputStream("/Users/ijarvis/IdeaProjects/intelliq-console/src/main/resources/rabbitmqssl/rabbitmq-epointclient.keycert.p12"), keyPassphrase);
 
-        KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
-        kmf.init(ks, keyPassphrase);
+//        String properties = System.getProperty(args[0]);
+//        System.out.println("----------get properties"+args[0]+"------------");
+//        System.out.println(properties);
+//        String env = System.getenv(args[0]);
+//        System.out.println("----------------------");
+//        System.out.println(env);
 
-        char[] trustPassphrase = "p@ssw0rd".toCharArray();
-        KeyStore tks = KeyStore.getInstance("JKS");
-        tks.load(new FileInputStream("/Users/ijarvis/IdeaProjects/intelliq-console/src/main/resources/rabbitmqssl/rabbitmqstore"), trustPassphrase);
 
-        TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
-        tmf.init(tks);
 
-        SSLContext c = SSLContext.getInstance("TLSv1.1");
-        c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
+        //String docker1 = System.getProperty("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
+        String docker2 = System.getenv("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
+        //System.out.println(docker1);
+        System.out.println(docker2);
 
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.206.72");
-        factory.setPort(5672);
-        factory.useSslProtocol(c);
-        factory.setUsername("epoint");
-        factory.setPassword("epoint");
-        Connection conn = factory.newConnection();
-        Channel channel = conn.createChannel();
 
-        channel.queueDeclare("rabbitmq-java-test", false, true, true, null);
-        channel.basicPublish("", "rabbitmq-java-test", null, "Hello, World via SSL".getBytes());
 
-        GetResponse chResponse = channel.basicGet("rabbitmq-java-test", false);
-        if (chResponse == null)
-        {
-            System.out.println("No message retrieved");
-        }
-        else
-        {
-            byte[] body = chResponse.getBody();
-            System.out.println("Recieved: " + new String(body));
-        }
 
-        channel.close();
-        conn.close();
+
+        //        String data = "access_token=2315e98381567f4466e5a83077e68ff2";
+//        URL url = new URL("http://testhosts:18088/epoint-web/rest/organization/getAllUser");
+//        URLConnection conn = url.openConnection();
+//        conn.setDoOutput(true);
+//        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+//
+//        //write parameters
+//        writer.write(data);
+//        writer.flush();
+//
+//        // Get the response
+//        StringBuffer answer = new StringBuffer();
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//        String line;
+//        while ((line = reader.readLine()) != null) {
+//            answer.append(line);
+//        }
+//        writer.close();
+//        reader.close();
+//
+//        //Output the response
+//        System.out.println(new String(answer.toString().getBytes(),"utf-8"));
+//        System.out.println("========================");
+//        System.out.println(answer.toString());
 
     }
 }
