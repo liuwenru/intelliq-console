@@ -9,16 +9,20 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 
 public class Apps {
     public static Logger logger=Logger.getLogger(Apps.class);
-    public static void  main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException, TimeoutException {
+    public static void  main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException, TimeoutException, ParseException {
 
 //        String properties = System.getProperty(args[0]);
 //        System.out.println("----------get properties"+args[0]+"------------");
@@ -30,10 +34,13 @@ public class Apps {
 
 
         //String docker1 = System.getProperty("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
-        String docker2 = System.getenv("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
+        //String docker2 = System.getenv("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
         //System.out.println(docker1);
-        System.out.println(docker2);
+        //System.out.println(docker2);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String hostip=java.net.InetAddress.getByName("wwww.baidu.com").getHostAddress();
+        System.out.println(hostip);
 
 
 
