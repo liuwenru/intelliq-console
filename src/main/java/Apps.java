@@ -1,74 +1,45 @@
 import org.apache.log4j.Logger;
-
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.GetResponse;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.URLConnection;
-import java.security.*;
-import java.security.cert.CertificateException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Properties;
-import java.util.concurrent.TimeoutException;
+
 
 public class Apps {
-    public static Logger logger=Logger.getLogger(Apps.class);
-    public static void  main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException, TimeoutException, ParseException {
+    public static Logger logger = Logger.getLogger(Apps.class);
 
-//        String properties = System.getProperty(args[0]);
-//        System.out.println("----------get properties"+args[0]+"------------");
-//        System.out.println(properties);
-//        String env = System.getenv(args[0]);
-//        System.out.println("----------------------");
-//        System.out.println(env);
+    public static void main(String[] args) throws IOException {
+        /*
+            阿里云的Linux服务器进程关键字         aliyun-service
+            阿里云的Windows服务器进程关键字         aliyunservice
+            华为云的Linux服务器进程关键字         uvp-monitor
+            华为云的Windows服务器进程关键字         uvpmonitor
+        */
+        String Aliyun="aliyun-service";
+        String Huaweiyun="uvp-monitor";
+        System.out.println("is Aliyun ?  "+getIaasInfo(Aliyun));
+        System.out.println("is Huaweiyun ? "+ getIaasInfo(Huaweiyun));
 
-
-
-        //String docker1 = System.getProperty("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
-        //String docker2 = System.getenv("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER").toLowerCase();
-        //System.out.println(docker1);
-        //System.out.println(docker2);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        String hostip=java.net.InetAddress.getByName("wwww.baidu.com").getHostAddress();
-        System.out.println(hostip);
-
-
-
-
-        //        String data = "access_token=2315e98381567f4466e5a83077e68ff2";
-//        URL url = new URL("http://testhosts:18088/epoint-web/rest/organization/getAllUser");
-//        URLConnection conn = url.openConnection();
-//        conn.setDoOutput(true);
-//        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-//
-//        //write parameters
-//        writer.write(data);
-//        writer.flush();
-//
-//        // Get the response
-//        StringBuffer answer = new StringBuffer();
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//        String line;
-//        while ((line = reader.readLine()) != null) {
-//            answer.append(line);
-//        }
-//        writer.close();
-//        reader.close();
-//
-//        //Output the response
-//        System.out.println(new String(answer.toString().getBytes(),"utf-8"));
-//        System.out.println("========================");
-//        System.out.println(answer.toString());
-
+    }
+    public static boolean getIaasInfo(String keyworlds) throws IOException {
+        //获取IaaS层平台信息方法
+        String CMD="";
+        String osName = System.getProperty("os.name");
+        System.out.println("The OS Version is "+osName);
+        if (osName.toLowerCase().indexOf("linux")<0){
+            //操作系统是Windows
+            CMD="tasklist";
+        }else {
+            //操作系统是Linux， Max OS不考虑
+            CMD="ps -ef";
+        }
+        Process process = Runtime.getRuntime().exec(CMD);
+        BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line = "";
+        while ((line = input.readLine()) != null) {
+            if (line.toLowerCase().indexOf(keyworlds)>=0){
+                System.out.println(line);
+                return true;
+            }
+        }
+        input.close();
+        return false;
     }
 }
