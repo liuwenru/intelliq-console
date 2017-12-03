@@ -13,7 +13,8 @@ public class Apps {
         Statement command=conn.createStatement();
         ResultSet dataset= command.executeQuery(SQL);
         while (dataset.next()){
-            logger.debug(dataset.getString(1)+"------"+dataset.getString(3));
+            logger.debug(dataset.getString(1));
         }
+        conn.close();
     }
 }
