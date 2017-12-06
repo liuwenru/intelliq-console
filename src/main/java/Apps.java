@@ -1,25 +1,29 @@
+import org.apache.log4j.Logger;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
-/**
- * Created by ijarvis on 2017/5/17.
- */
-public class Apps {
+import java.math.BigDecimal;
+import java.sql.*;
 
-
-    public static void  main(String[] args){
-        try {
-            Jedis jedis = new Jedis(args[0],Integer.parseInt(args[1]));
-            if (args.length==3 && !args[2].equals("")){
-                jedis.auth(args[2]);
-            }
-            jedis.set("epoint","success");
-            System.out.println("set key success。。。。。。。。。。。。。");
-            jedis.close();
-        }catch (Exception e){
-            throw e;
-        }
-
+public class Apps extends Thread {
+    private static Logger logger=Logger.getLogger(Apps.class);
+    private Subscriber subscriber=new Subscriber();
+    private static String channel = "mychannel";
+    private static Jedis jedis=null;
+    public static void  main(String[] args) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException, InterruptedException {
+        channel=args[0];
+        JedisPoolConfig config=new JedisPoolConfig();
+        config.setTestWhileIdle(true);
+        JedisPool pool=new JedisPool(config,args[1],6379,3000,"Gepoint");
+        jedis=pool.getResource();
+        logger.debug(jedis.ping());
+        Apps apps=new Apps();
+        apps.start();
     }
 
-
+    @Override
+    public void run() {
+        jedis.subscribe(subscriber, channel);
+    }
 }

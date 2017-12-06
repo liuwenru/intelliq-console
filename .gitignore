@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+rebel.xml
 # Log file
 *.log
 
