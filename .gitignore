@@ -22,3 +22,5 @@
 hs_err_pid*
 intelliqconsole.iml
 .idea/
+intelliq-console.iml
+target/
