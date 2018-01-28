@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-
+apply plugin: 'application'
 group = 'ijarvis.intelliq'
 version = '1.0-SNAPSHOT'
 
@@ -8,11 +8,7 @@ description = """"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-
-
 repositories {
-        
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
@@ -21,3 +17,4 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version:'6.0.6'
     compile group: 'redis.clients', name: 'jedis', version:'2.9.0'
 }
+mainClassName='Apps'
