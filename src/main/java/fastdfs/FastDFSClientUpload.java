@@ -11,8 +11,29 @@ import org.csource.fastdfs.*;
 
 public class FastDFSClientUpload {
     public static Logger logger=Logger.getLogger(FastDFSClientUpload.class);
+//    public static String CONF_FILENAME="/Users/ijarvis/IdeaProjects/intelliq-console/src/main/resources/fdfs_client.conf";
+//    public static TrackerClient tracker=new TrackerClient();
+//    public static TrackerServer trackerServer;
+//    public static StorageServer storageServer = null;
+//    public static StorageClient storageClient = new StorageClient(trackerServer, storageServer);
+//    static {
+//        try {
+//            logger.debug("正在初始化上传模块删除属性...............................");
+//            ClientGlobal.init(CONF_FILENAME);
+//            trackerServer = tracker.getConnection();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (MyException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+
+
     public static void FastDFSClientUploadTest(String configfilepath,String count){
         try {
+            logger.debug("AAAAAAAA");
             String conf_filename=configfilepath;
             ClientGlobal.init(conf_filename);
             TrackerClient tracker = new TrackerClient();
@@ -20,8 +41,9 @@ public class FastDFSClientUpload {
             StorageServer storageServer = null;
             StorageClient storageClient = new StorageClient(trackerServer, storageServer);
             byte probyte=0x61;
-            byte[] bytes=new byte[Integer.parseInt(count)*1024];
-            for (int i=0;i< Integer.parseInt(count)*1024;i++){
+            int bytecount=Integer.parseInt(count)*1024;
+            byte[] bytes=new byte[bytecount];
+            for (int i=0;i< bytecount;i++){
                 bytes[i]=probyte;
             }
             int j=0;
@@ -29,8 +51,9 @@ public class FastDFSClientUpload {
                 long start=System.currentTimeMillis();
                 String[] fileid=storageClient.upload_file(bytes,"txt",null);
                 long end=System.currentTimeMillis();
-                logger.debug("upload" + (Integer.parseInt(count)*1024)/((end-start)/1.0)/1000+"Mb/s");
+                logger.debug("upload" + (Integer.parseInt(count)*1024)/((end-start)/1.0)/1000+"MB/s");
                 j++;
+                logger.debug("Group Name:"+fileid[0]+"   File Path:"+fileid[1]);
             }
         }catch (Exception e){
             logger.error("Upload file Error.............",e);
