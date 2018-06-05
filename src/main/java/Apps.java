@@ -1,32 +1,65 @@
-import fastdfs.FastDFSClientUpload;
-import org.apache.log4j.Logger;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Apps {
-    private static  final Logger logger= Logger.getLogger(Apps.class);
-    public static void  main(String[] args) throws InterruptedException {
-        logger.debug("测试文件上传操作");
-        //FastDFSClientUpload uploader=new FastDFSClientUpload();
-        //FastDFSClientUpload.FastDFSClientUploadTest(args[0],args[1]);
-        int threadcount=Integer.parseInt(args[0]);
-        uploadthread[] threads=new uploadthread[threadcount];
-        for (int i =0;i< threadcount;i++){
-            threads[i]=new uploadthread(args[1],args[2]);
-        }
-        for (int i =0;i< threadcount;i++){
-            threads[i].run();
-        }
+
+    public  static void main(String[] args) throws IOException, InterruptedException {
+        OkHttpClient client = client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
+
+                for (int i=0;i<200;i++){
+                    try {
+                        okhttpclientthread tmp=new okhttpclientthread(client,i);
+                        tmp.start();
+                    }catch (Exception e){
+                        System.out.println("ssss");
+                        continue;
+                    }
+
+                }
+                Thread.sleep(200*1000);
+
     }
+    public static void aaaa(OkHttpClient client) throws IOException {
+        Request request=null;
+        Response response=null;
+            request = new Request.Builder().url("http://localhost:8080/intelliq-web/TestServlet/aa").build();
+            response = client.newCall(request).execute();
+            response.body().close();
+
+        //System.out.println(response.body().string());
+    }
+
+
 }
-class  uploadthread implements Runnable{
-    private String configurefile="";
-    private String count="";
-    public uploadthread(String configurefile,String count){
-        this.configurefile=configurefile;
-        this.count=count;
+
+class okhttpclientthread extends Thread {
+    int number=0;
+    OkHttpClient client =null;
+    public  okhttpclientthread(OkHttpClient client,int num){
+        this.client=client;
+        this.number=num;
     }
     @Override
     public void run() {
-        FastDFSClientUpload uploader=new FastDFSClientUpload();
-        FastDFSClientUpload.FastDFSClientUploadTest(this.configurefile,this.count);
+
+        System.out.println(this.number+"running");
+        Request request=null;
+        Response response=null;
+        request = new Request.Builder().url("http://localhost:8080/intelliq-web/TestServlet/aa").build();
+        try {
+            response = client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        response.body().close();
+
     }
 }

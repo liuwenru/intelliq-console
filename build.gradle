@@ -9,38 +9,11 @@ description = """"""
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 repositories {
-     maven { url "http://repo.maven.apache.org/maven2" }
-     mavenLocal()
      jcenter()
-     maven {
-        url ("https://maven.oracle.com")
-     }
 }
 dependencies {
     compile group: 'junit', name: 'junit', version:'4.12'
     compile group: 'log4j', name: 'log4j', version:'1.2.14'
-    compile group: 'org.csource', name: 'fastdfs-client-java', version: '1.27-SNAPSHOT'
-    compile group: 'com.rabbitmq', name: 'amqp-client', version: '3.5.6'
-    compile files('/Users/ijarvis/Downloads/ojdbc7-12.1.0.jar')
-
+    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.10.0'
 }
-// mainClassName='rabbitmq.epointrabbitmq'
-
-
-
-// mainClassName='Apps'
-
-
-
-//mainClassName='fastdfs.uploadanddownloadtest'
-
-mainClassName='Oracletofile'
-
-
-//mainClassName='fastdfs.uploadfileApps'
-
-
-
-//mainClassName='fastdfs.FastDFSClientDownload'
-
-
+mainClassName='Apps'
