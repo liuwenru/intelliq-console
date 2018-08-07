@@ -20,6 +20,12 @@
 	<logger name="org.apache">
 		<level value="ERROR" />
 	</logger>
+	<logger name="org.mongodb.driver.protocol">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.mongodb.driver.cluster">
+		<level value="ERROR" />
+	</logger>
 	<root>
 		<level value="DEBUG" />
 		<appender-ref ref="STDOUT" />
