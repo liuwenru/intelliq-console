@@ -2,6 +2,7 @@ package MongoDBUtils;
 
 
 import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -37,6 +38,7 @@ public class MongoDBApps {
         documents.add(doc2);
         documents.add(doc3);
         collection.insertMany(documents);
+
 
         mongoClient.close();
     }
