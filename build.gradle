@@ -20,5 +20,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
     compile fileTree(dir: './canal-client-libs/', include:['*.jar'])
+    compile group: 'io.lettuce', name: 'lettuce-core', version: '5.0.5.RELEASE'
+    compile group: 'redis.clients', name: 'jedis', version: '2.6.3'
 }
 mainClassName='Apps'
