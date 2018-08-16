@@ -1,3 +1,6 @@
+plugins {
+    id "org.zeroturnaround.gradle.jrebel" version "1.1.8"
+}
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'application'
@@ -8,10 +11,14 @@ description = """"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+jar.dependsOn(generateRebel)
 
 repositories {
-     jcenter()
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+    jcenter()
 }
+
 dependencies {
     compile group: 'junit', name: 'junit', version:'4.12'
     compile group: 'log4j', name: 'log4j', version:'1.2.14'
