@@ -41,3 +41,6 @@ out/
 .project
 .settings/
 bin/
+
+
+.DS_Store
