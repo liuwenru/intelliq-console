@@ -1,8 +1,5 @@
 package RedisUtils;
-
-import io.lettuce.core.RedisClient;
-import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.api.sync.RedisCommands;
+;
 import org.junit.Ignore;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;

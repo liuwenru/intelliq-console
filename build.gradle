@@ -26,9 +26,10 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
     //compile fileTree(dir: './canal-client-libs/', include:['*.jar'])
-    compile group: 'io.lettuce', name: 'lettuce-core', version: '5.0.5.RELEASE'
-    compile group: 'redis.clients', name: 'jedis', version: '2.6.3'
+    //compile group: 'io.lettuce', name: 'lettuce-core', version: '5.0.5.RELEASE'
+
     compile fileTree(dir: './ext-libs/', include:['*.jar'])
+    //compile fileTree(dir: '../spring-framework-4.1.6.RELEASE/libs', include:['*.jar'])
     compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.38'
     compile group: 'redis.clients', name: 'jedis', version:'2.9.0'
 
@@ -39,6 +40,9 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context', version:'4.3.4.RELEASE'
     compile group: 'org.springframework', name: 'spring-core', version:'4.3.4.RELEASE'
     compile group: 'org.springframework', name: 'spring-beans', version:'4.3.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.4.RELEASE'
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
+
 
 
 
