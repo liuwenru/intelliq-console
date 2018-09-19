@@ -8,12 +8,11 @@ public class RabbitMQApps {
     private final static String QUEUE_NAME = "hello";
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setUri("amqp://epoint:epoint@192.168.188.72/%2f");
+        factory.setUri("amqp://epoint:epoint@"+argv[1]+"/%2f");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
@@ -22,12 +21,12 @@ public class RabbitMQApps {
                 System.out.println(" [x] Received '" + message + "'");
                 try {
                     System.out.println(" [x] 我TM的消费就是很慢 ！！！！！'" + message );
-                    Thread.sleep(1000000);
+                    Thread.sleep( Long.parseLong(argv[0]));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         };
-        channel.basicConsume(QUEUE_NAME, false, consumer);
+        channel.basicConsume(QUEUE_NAME, true, consumer);
     }
 }

@@ -7,6 +7,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisTestUtils {
+    @Ignore
     @Test
     public void  RedisLettuceTest(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();

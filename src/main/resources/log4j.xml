@@ -17,14 +17,14 @@
 			<param name="ConversionPattern" value="%d [%t] %-5p %C{6} (%F:%L) - %m%n" />
 		</layout>
 	</appender>
-	<logger name="org.apache">
-		<level value="ERROR" />
-	</logger>
 	<logger name="org.mongodb.driver.protocol">
 		<level value="ERROR" />
 	</logger>
 	<logger name="org.mongodb.driver.cluster">
 		<level value="ERROR" />
+	</logger>
+	<logger name="org.apache">
+		<level value="DEBUG" />
 	</logger>
 	<root>
 		<level value="DEBUG" />

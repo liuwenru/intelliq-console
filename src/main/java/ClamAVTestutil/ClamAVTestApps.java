@@ -20,6 +20,5 @@ public class ClamAVTestApps {
                 throw new Exception("aaargh. Something was found");
             }
         }
-
     }
 }

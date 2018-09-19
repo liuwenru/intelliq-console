@@ -16,7 +16,7 @@ public class DruidApps {
             ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
             DataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
             Connection connection = dataSource.getConnection();
-            PreparedStatement comm = connection.prepareStatement("select 1");
+            PreparedStatement comm = connection.prepareStatement("select * from frame_attachinfo");
             comm.executeQuery();
             //command.executeQuery("select 1");
             logger.debug("Success");
