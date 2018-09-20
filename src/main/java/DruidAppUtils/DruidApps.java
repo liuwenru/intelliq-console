@@ -12,15 +12,20 @@ import java.sql.SQLException;
 public class DruidApps {
     private static Logger logger= LoggerFactory.getLogger(DruidApps.class);
     public static void main(String[] args) throws SQLException, InterruptedException {
+        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        DataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
+        int i=0;
         while(true) {
-            ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-            DataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
+            logger.debug("----------------开始获取连接---------------");
             Connection connection = dataSource.getConnection();
             PreparedStatement comm = connection.prepareStatement("select * from frame_attachinfo");
             comm.executeQuery();
-            //command.executeQuery("select 1");
             logger.debug("Success");
-            connection.close();
+            if((i%2)==0){
+                connection.close();
+                logger.debug("----------------关闭获取到连接---------------");
+            }
+            i=i+1;
             Thread.sleep(4000);
         }
     }
