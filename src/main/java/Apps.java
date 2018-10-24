@@ -1,17 +1,14 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Apps {
-
+    private static Logger logger=LoggerFactory.getLogger(Apps.class);
     public  static void main(String[] args) throws InterruptedException, IOException {
-        InputStream in = null;
-        Process pro = Runtime.getRuntime().exec(new String[]{"sh", "/home/parallels/aaa.sh"});
-        pro.waitFor();
-        in = pro.getInputStream();
-        BufferedReader read = new BufferedReader(new InputStreamReader(in));
-        String result = read.readLine();
-        System.out.println("INFO:"+result);
+        String docker=System.getenv("CURRENT_ALPINE_GLIBC_BASE_IMAGE_VER");
     }
 }
