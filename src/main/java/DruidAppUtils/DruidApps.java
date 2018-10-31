@@ -18,15 +18,13 @@ public class DruidApps {
         while(true) {
             logger.debug("----------------开始获取连接---------------");
             Connection connection = dataSource.getConnection();
-            PreparedStatement comm = connection.prepareStatement("select * from frame_attachinfo");
+            PreparedStatement comm = connection.prepareStatement("select * from titles limit 10");
             comm.executeQuery();
             logger.debug("Success");
             if((i%2)==0){
                 connection.close();
                 logger.debug("----------------关闭获取到连接---------------");
             }
-            i=i+1;
-            Thread.sleep(4000);
         }
     }
 }
