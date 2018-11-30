@@ -50,7 +50,7 @@ dependencies {
     // compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
     // compile group: 'org.soulwing', name: 'crypt4j', version: '1.0.1'
 }
-mainClassName='PDFBoxUtils.PDFBOXApp'
+mainClassName='File2Base64.Apps'
 
 
 
