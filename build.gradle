@@ -49,6 +49,12 @@ dependencies {
     compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.9',ext: 'jar'
     // compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
     // compile group: 'org.soulwing', name: 'crypt4j', version: '1.0.1'
+
+    compile 'org.apache.rocketmq:rocketmq-client:4.3.0'
+    compile group: 'com.whalin', name: 'Memcached-Java-Client', version: '3.0.2'
+    
+    
+
 }
 mainClassName='File2Base64.Apps'
 
