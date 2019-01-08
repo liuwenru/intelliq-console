@@ -14,6 +14,50 @@ public class MySQLTestApps {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InterruptedException {
         Class.forName("com.mysql.jdbc.Driver");
+        int productnumber=Integer.parseInt(args[2]);
+        dbaleProducer[] dbarry=new dbaleProducer[productnumber];
+        for (int i=0;i<productnumber;i++){
+            dbarry[i]=new dbaleProducer(args);
+            dbarry[i].start();
+        }
+        for (int i=0;i<productnumber;i++){
+            dbarry[i]=new dbaleProducer(args);
+            dbarry[i].join();
+        }
+
+        System.out.println("End.........");
+
+    }
+
+
+}
+
+class  dbaleProducer extends  Thread{
+    public String[] getDruiration() {
+        return druiration;
+    }
+
+    public void setDruiration(String[] druiration) {
+        this.druiration = druiration;
+    }
+
+    public String[] druiration=new String[2];
+
+    public dbaleProducer(String[] args){
+        this.setDruiration(args);
+    }
+    @Override
+    public void run() {
+        try {
+            System.out.println("Satrting");
+            insertdata(druiration);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static  void insertdata(String[] args) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.186.231:8066/testdb?user=root&password=123456");
         String SQL = "select * from epointbigtable limit 5000";
         Statement com = conn.createStatement();
@@ -76,16 +120,5 @@ public class MySQLTestApps {
             ps.executeBatch();
             System.out.println("插入100000 SSUCCESS！");
         }
-    }
-
-
-}
-
-class  dbaleProducer extends  Thread{
-
-
-    @Override
-    public void run() {
-
     }
 }
