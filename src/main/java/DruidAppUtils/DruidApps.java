@@ -13,24 +13,19 @@ import java.sql.*;
 public class DruidApps {
     private static Logger logger= LoggerFactory.getLogger(DruidApps.class);
     public static void main(String[] args) throws SQLException, InterruptedException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("file:///root/workspace/javaworkspace/intelliq-console/src/main/resources/application-context.xml");
         DataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
         Connection connection=dataSource.getConnection();
         Statement command=connection.createStatement();
-        //Thread.sleep(60*1000);
-        Jedis jedis=new Jedis("192.168.188.75",7001);
-        jedis.auth("Gepoint");
-        long start= System.currentTimeMillis();
-        while (true){
-            jedis.set("epointkey","1111111");
-            long end=System.currentTimeMillis();
-            if ((end-start)/1000.0> 60){
-                break;
-            }
+
+        for (int i =20;i<10000;i++){
+            command.execute("insert into travelrecord(id,name) values ("+i+",'ijarvis"+i+"')");
+
         }
-        ResultSet dataset=command.executeQuery("select * from titles limit 10");
+        ResultSet dataset=command.executeQuery("select * from travelrecord");
         while (dataset.next()){
-            logger.debug(dataset.getString(2));
+            System.out.println(dataset.getString(1)+"    "  + dataset.getString(2) );
+            logger.debug(dataset.getString(1)+"    "  + dataset.getString(2) );
         }
     }
 }

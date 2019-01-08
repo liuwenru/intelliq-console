@@ -27,7 +27,7 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
     //compile fileTree(dir: './canal-client-libs/', include:['*.jar'])
     //compile group: 'io.lettuce', name: 'lettuce-core', version: '5.0.5.RELEASE'
-    //compile fileTree(dir: './ext-libs/', include:['*.jar'])
+    compile fileTree(dir: './ext-libs/', include:['*.jar'])
     compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.38'
     compile group: 'redis.clients', name: 'jedis', version:'2.9.0'
     // duid 连接池
@@ -51,28 +51,9 @@ dependencies {
     // compile group: 'org.soulwing', name: 'crypt4j', version: '1.0.1'
 
     compile 'org.apache.rocketmq:rocketmq-client:4.3.0'
-    compile group: 'com.whalin', name: 'Memcached-Java-Client', version: '3.0.2'
-    
-    
-
+    compile group: 'com.googlecode.xmemcached', name: 'xmemcached', version: '1.2.5'
+    compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.6.0'
+    // https://mvnrepository.com/artifact/io.lettuce/lettuce-core
+    compile group: 'io.lettuce', name: 'lettuce-core', version: '5.1.3.RELEASE'
 }
-mainClassName='File2Base64.Apps'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+mainClassName='MySQLUtils.MySQLTestApps'

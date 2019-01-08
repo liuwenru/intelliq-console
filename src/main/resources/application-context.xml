@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="jdbc:mysql://192.168.188.149:3306/employees?useSSL=false" />
+        <property name="url" value="jdbc:mysql://192.168.186.228:8066/testdb" />
         <property name="username" value="root" />
-        <property name="password" value="Gepoint" />
+        <property name="password" value="123456" />
         <property name="filters" value="stat" />
         <property name="maxActive" value="1" />
         <property name="initialSize" value="1" />
