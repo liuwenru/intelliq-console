@@ -58,14 +58,14 @@ class  dbaleProducer extends  Thread{
     }
 
     public static  void insertdata(String[] args) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.186.231:8066/testdb?user=root&password=123456");
-        String SQL = "select * from epointbigtable limit 5000";
+        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.186.228:8066/testdb?user=root&password=123456");
+        String SQL = "select * from epointbigtable limit 50";
         Statement com = conn.createStatement();
         ResultSet resultSet = com.executeQuery(SQL);
         String INSERTSQL="INSERT INTO `epointbigtable`(RowGuid,SYNC_SIGN,SYNC_ERROR_DESC,OperateType,SYNC_Date,xgbz,mxxmlb,tfbz,yzxmlxdm,bxlx,mxfylb,zjlx,jzlxdm,klx,mj,zxksbm,jzksdm,yljgdm,zjhm,mxxmgg,MXXMWJJBM,cfh,MXXMYBBM,fph,scph,sfmxlsh,zxdm,kh,mxxmdw,sfczyxm,JZLSH,yzxmlxmc,kfysxm,xm,sflsh,sfczygh,jclsh,kfysgh,zxksmc,jzksmc,mxxmbm,MXXMMC,mxxmje,yxq,tbrq,mxxmsl,mxxmdj,stfsj) VALUES (?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(INSERTSQL);
         while (resultSet.next()){
-            for (int j=0;j<100000;j++){
+            for (int j=0;j<10;j++){
                 java.util.Random r=new java.util.Random();
                 ps.setString(1, UUID.randomUUID().toString());
                 ps.setString(2,resultSet.getString(2));
