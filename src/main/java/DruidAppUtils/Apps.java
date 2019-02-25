@@ -5,13 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import redis.clients.jedis.Jedis;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
-public class DruidApps {
-    private static Logger logger= LoggerFactory.getLogger(DruidApps.class);
+public class Apps {
+    private static Logger logger= LoggerFactory.getLogger(Apps.class);
     public static void main(String[] args) throws SQLException, InterruptedException {
         ApplicationContext context = new ClassPathXmlApplicationContext("file:///root/workspace/javaworkspace/intelliq-console/src/main/resources/application-context.xml");
         DataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
