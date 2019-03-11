@@ -1,4 +1,4 @@
-package ftpsApps;
+package FtpsApps;
 
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
