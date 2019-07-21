@@ -1,21 +1,52 @@
-import FileApps.EncodingDetect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+
 import java.io.*;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import org.apache.commons.io.FileUtils;
+
+
 public class Apps {
-    private static Logger logger=LoggerFactory.getLogger(Apps.class);
-    public  static void main(String[] args) throws InterruptedException, IOException, NoSuchAlgorithmException, SQLException {
-//        String filePath="/home/ijarvis/fileutf8.txt";
-//        String fileEncode= EncodingDetect.getJavaEncode(filePath);
-//        String fileContent=FileUtils.readFileToString(new File(filePath),fileEncode);
-//        logger.debug("fileEncode:"+fileEncode);
-//        logger.debug("fileContent:"+fileContent);
-        String filePath=args[0];
-        String localfile=new String(filePath.getBytes("gbk"),"utf-8");
-        String fileContent=FileUtils.readFileToString(new File(filePath));
-        logger.debug(fileContent);
+
+    private static String url = "http://mail.epoint.com.cn:6080/";
+
+    public static void main(String[] args) {
+        // Create an instance of HttpClient.
+        HttpClient client = new HttpClient();
+        client.getParams().setParameter("http.protocol.version", HttpVersion.HTTP_1_0);
+        // Create a method instance.
+        PostMethod method = new PostMethod(url);
+        NameValuePair[] data = {
+                new NameValuePair("user", "joe"),
+                new NameValuePair("password", "bloggs")
+        };
+        method.setRequestBody(data);
+        // Provide custom retry handler is necessary
+        //method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(3, false));
+
+        try {
+            // Execute the method.
+            int statusCode = client.executeMethod(method);
+
+            if (statusCode != HttpStatus.SC_OK) {
+                System.err.println("Method failed: " + method.getStatusLine());
+            }
+
+            // Read the response body.
+            byte[] responseBody = method.getResponseBody();
+
+            // Deal with the response.
+            // Use caution: ensure correct character encoding and is not binary data
+            System.out.println(new String(responseBody));
+
+        } catch (HttpException e) {
+            System.err.println("Fatal protocol violation: " + e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Fatal transport error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Release the connection.
+            method.releaseConnection();
+        }
     }
 }
