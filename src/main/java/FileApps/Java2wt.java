@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class Java2wt {
     public static void main(String[] args) throws IOException, FontFormatException {
-        Font font=new Font("宋体",1,24);
+    	System.out.println(args[2]);
+        Font font=new Font(args[2],1,24);
     	//Font font=Font.createFont(Font.TRUETYPE_FONT,new File("/opt/apache-tomcat-8.5.43/jre/jre/lib/fonts/fallback/simsun.ttc"));
     	int with=300;
     	int hight=300;
@@ -31,5 +32,6 @@ public class Java2wt {
     	g2d.drawString(args[0],(int)x,(int)baseY);
     	g2d.dispose();
     	ImageIO.write(image,"png",new File(args[1]));
+    	System.in.read();
     }
 }
