@@ -160,7 +160,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>FileApps.Java2wt</mainClass>
+                                    <mainClass>JVMApps.Apps</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
