@@ -11,8 +11,8 @@ import java.io.IOException;
 public class Java2wt {
     public static void main(String[] args) throws IOException, FontFormatException {
     	System.out.println(args[2]);
-        Font font=new Font(args[2],1,24);
-    	//Font font=Font.createFont(Font.TRUETYPE_FONT,new File("/opt/apache-tomcat-8.5.43/jre/jre/lib/fonts/fallback/simsun.ttc"));
+        //Font font=new Font(args[2],1,24);
+    	Font font=Font.createFont(Font.TRUETYPE_FONT,new File(args[2]));
     	int with=300;
     	int hight=300;
     	BufferedImage image=new BufferedImage(with,hight,BufferedImage.TYPE_INT_ARGB);
