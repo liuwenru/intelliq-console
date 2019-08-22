@@ -12,19 +12,13 @@ import java.sql.*;
 public class Apps {
     private static Logger logger= LoggerFactory.getLogger(Apps.class);
     public static void main(String[] args) throws SQLException, InterruptedException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("file:///root/workspace/javaworkspace/intelliq-console/src/main/resources/application-context.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext(args[0]);
         DataSource dataSource = context.getBean("dataSource", DruidDataSource.class);
         Connection connection=dataSource.getConnection();
         Statement command=connection.createStatement();
-
-        for (int i =20;i<10000;i++){
-            command.execute("insert into travelrecord(id,name) values ("+i+",'ijarvis"+i+"')");
-
-        }
-        ResultSet dataset=command.executeQuery("select * from travelrecord");
-        while (dataset.next()){
-            System.out.println(dataset.getString(1)+"    "  + dataset.getString(2) );
-            logger.debug(dataset.getString(1)+"    "  + dataset.getString(2) );
+        ResultSet resultSet=command.executeQuery("select * from frame_user");
+        while (resultSet.next()){
+            System.out.println(resultSet.getString(1)+"===="+resultSet.getString(2));
         }
     }
 }
