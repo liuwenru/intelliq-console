@@ -4,24 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="jdbc:mysql://localhost:3306/tuiliu" />
+        <property name="url" value="jdbc:mysql://192.168.188.109:3306/tuiliu" />
         <property name="username" value="root" />
         <property name="password" value="Gepoint" />
         <property name="filters" value="stat" />
-        <property name="maxActive" value="1" />
-        <property name="initialSize" value="1" />
-        <property name="maxWait" value="60000" />
-        <property name="minIdle" value="1" />
-        <property name="timeBetweenEvictionRunsMillis" value="50000" />
-        <property name="minEvictableIdleTimeMillis" value="300000" />
         <property name="testWhileIdle" value="true" />
-        <property name="testOnBorrow" value="false" />
+        <property name="testOnBorrow" value="true" />
         <property name="testOnReturn" value="false" />
-        <property name="poolPreparedStatements" value="true" />
-        <property name="maxOpenPreparedStatements" value="20" />
-        <property name="removeAbandonedTimeoutMillis" value="2000" />
+        <property name="removeAbandonedTimeoutMillis" value="180000" />
         <property name="removeAbandoned" value="true" />
         <property name="logAbandoned" value="true" />
+        <property name="maxActive" value="300" />
         <!--
         <property name="asyncInit" value="true"  logAbandoned/>
         -->
