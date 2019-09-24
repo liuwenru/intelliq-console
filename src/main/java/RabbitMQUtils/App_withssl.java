@@ -20,23 +20,23 @@ public class App_withssl {
     public static void  main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException, TimeoutException {
         char[] keyPassphrase = "p@ssw0rd".toCharArray();
         KeyStore ks = KeyStore.getInstance("PKCS12");
-        ks.load(new FileInputStream(args[0]), keyPassphrase);
+        ks.load(new FileInputStream("/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/epoint_rabbitmqssl/rabbitmq-epointclient.keycert.p12"), keyPassphrase);
 
         KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
         kmf.init(ks, keyPassphrase);
 
         char[] trustPassphrase = "p@ssw0rd".toCharArray();
         KeyStore tks = KeyStore.getInstance("JKS");
-        tks.load(new FileInputStream(args[1]), trustPassphrase);
+        tks.load(new FileInputStream("/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/epoint_rabbitmqssl/rabbitmq.store"), trustPassphrase);
 
         TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
         tmf.init(tks);
 
-        SSLContext c = SSLContext.getInstance("TLSv1.1");
+        SSLContext c = SSLContext.getInstance("TLSv1.2");
         c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(args[2]);
+        factory.setHost("192.168.188.116");
         factory.setPort(5671);
         factory.useSslProtocol(c);
         factory.setUsername("epoint");
