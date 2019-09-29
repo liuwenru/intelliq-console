@@ -36,7 +36,7 @@ public class App_withssl {
         c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.188.116");
+        factory.setHost("192.168.188.119");
         factory.setPort(5671);
         factory.useSslProtocol(c);
         factory.setUsername("epoint");
@@ -48,12 +48,10 @@ public class App_withssl {
         channel.basicPublish("", "rabbitmq-java-test", null, "Hello, World via SSL".getBytes());
 
         GetResponse chResponse = channel.basicGet("rabbitmq-java-test", false);
-        if (chResponse == null)
-        {
+        if (chResponse == null){
             System.out.println("No message retrieved");
         }
-        else
-        {
+        else{
             byte[] body = chResponse.getBody();
             System.out.println("Recieved: " + new String(body));
         }

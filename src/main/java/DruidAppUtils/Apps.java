@@ -17,38 +17,22 @@ public class Apps {
     public static void main(String[] args) throws Exception {
         context=new ClassPathXmlApplicationContext("file:///home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/application-context.xml");
         dataSource=context.getBean("dataSource", DruidDataSource.class);
-        int size=50;
-        Threadepoint[] threadepoints=new Threadepoint[size];
-        for(int i=0;i<size;i++){
-            threadepoints[i]=new Threadepoint(dataSource);
-            threadepoints[i].start();
-        }
-        while(true){
 
-        }
-    }
-
-}
-
-
-class  Threadepoint extends Thread{
-    DataSource dataSource;
-    public  Threadepoint(DataSource dataSource){
-        this.dataSource=dataSource;
-    }
-
-    @Override
-    public void run() {
-        while(true){
-            Connection connection= null;
-            try {
-                connection = dataSource.getConnection();
-                Statement command=connection.createStatement();
-                ResultSet resultSet=command.executeQuery("select * from frame_user1");
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//        int size=50;
+//        Threadepoint[] threadepoints=new Threadepoint[size];
+//        for(int i=0;i<size;i++){
+//            threadepoints[i]=new Threadepoint(dataSource);
+//            threadepoints[i].start();
+//        }
+//        while(true){
+//
+//        }
+        Connection connection= dataSource.getConnection();
+        Statement command=connection.createStatement();
+        ResultSet resultSet= command.executeQuery("select * from SJ_Salary");
+        while (resultSet.next()){
+            System.out.println(resultSet.getString(1));
         }
     }
+
 }
