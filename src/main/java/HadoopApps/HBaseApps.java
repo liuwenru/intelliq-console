@@ -13,7 +13,7 @@ import java.io.IOException;
 public class HBaseApps {
     public static void main(String[] args) throws IOException {
         Configuration config=HBaseConfiguration.create();
-        config.set("hbase.zookeeper.quorum","epnode1.epoint,epnode2.epoint,epnode3.epoint");
+        config.set("hbase.zookeeper.quorum",args[0]);
         //config.set("hbase.zookeeper.property.clientPort", "2181");
         config.set("zookeeper.znode.parent", "/hbase-unsecure");
         Connection conn = ConnectionFactory.createConnection(config);
