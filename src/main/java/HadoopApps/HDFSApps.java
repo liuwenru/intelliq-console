@@ -22,9 +22,8 @@ public class HDFSApps {
         conf.set("dfs.namenode.kerberos.principal.pattern", "*/*@epoint");
         UserGroupInformation.setConfiguration(conf);
         UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
-
         FileSystem fs=FileSystem.get(conf);
-        fs.copyFromLocalFile(new Path("/home/ijarvis/Packages/dtrace_topics_java.pdf"),new Path("/user/dtrace_topics_java.pdf"));
+        fs.copyFromLocalFile(new Path("/home/ijarvis/Downloads/astah_uml/astah-command.sh"),new Path("/user/astah-command.sh"));
         InputStream in=null;
         in=fs.open(new Path(uri));
         IOUtils.copyBytes(in,System.out,4096,false);
