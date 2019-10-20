@@ -90,11 +90,25 @@
             <systemPath>${project.basedir}/ext-libs/ojdbc7-12.1.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc</artifactId>
-            <version>7.12</version>
+            <groupId>com.mircosoft</groupId>
+            <artifactId>sqljdbc</artifactId>
+            <version>4.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/ext-libs/sqljdbc4-4.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.epoint</groupId>
+            <artifactId>sn</artifactId>
+            <version>7.12</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/ext-libs/sn.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>jna</artifactId>
+            <version>3.0.9</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/ext-libs/jna-3.0.9.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -153,6 +167,11 @@
             <artifactId>phoenix-core</artifactId>
             <version>4.7.0-HBase-1.1</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.sun.jna</groupId>-->
+<!--            <artifactId>jna</artifactId>-->
+<!--            <version>3.0.9</version>-->
+<!--        </dependency>-->
     </dependencies>
     <build>
         <finalName>intelliq-console</finalName>
@@ -223,7 +242,7 @@
                             </filters>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>PipeApps.PipeDemo</mainClass>
+                                    <mainClass>Apps</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
