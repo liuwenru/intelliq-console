@@ -25,11 +25,12 @@ public class HbaseAppswithKerberos {
         config.set("hbase.master.kerberos.principal", HBASE_MASTER_PRINCIPAL);
         config.set("hbase.regionserver.kerberos.principal",HBASE_RS_PRINCIPAL);
         UserGroupInformation.setConfiguration(config);
-        UserGroupInformation.loginUserFromKeytab("hbase-epointhadoop@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/hbase.keytab");
+        //UserGroupInformation.loginUserFromKeytab("hbase-epointhadoop@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/hbase.keytab");
+        UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         Connection conn = ConnectionFactory.createConnection(config);
         Table table=conn.getTable(TableName.valueOf("testtable"));
         Put put=new Put(Bytes.toBytes("row1"));
-        put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual1"),Bytes.toBytes("val1-ijarvis-epoint-666666777666"));
+        put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual1"),Bytes.toBytes("val1-ijarvis-epoint-cccccccccc"));
         //put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual2"),Bytes.toBytes("val2-ijarvis"));
         table.put(put);
     }
