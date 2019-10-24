@@ -29,8 +29,8 @@ public class HbaseAppswithKerberos {
         UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         Connection conn = ConnectionFactory.createConnection(config);
         Table table=conn.getTable(TableName.valueOf("testtable"));
-        Put put=new Put(Bytes.toBytes("row1"));
-        put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual1"),Bytes.toBytes("val1-ijarvis-epoint-cccccccc222222222cc"));
+        Put put=new Put(Bytes.toBytes("row3"));
+        put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual1"),Bytes.toBytes("val1-ijarvis-epoint-newvalue"));
         //put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual2"),Bytes.toBytes("val2-ijarvis"));
         table.put(put);
     }

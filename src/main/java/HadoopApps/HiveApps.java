@@ -16,15 +16,15 @@ public class HiveApps {
         conf.set("dfs.namenode.kerberos.principal.pattern", "*/*@epoint");
         UserGroupInformation.setConfiguration(conf);
         UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
-
-
         Class.forName(driverName);
-        Connection con = DriverManager.getConnection("jdbc:hive2://epnode2:10000/default;principal=hive/epnode2.epoint@epoint", "hive", "");
+        //Connection con = DriverManager.getConnection("jdbc:hive2://epnode2:10000/default;principal=hive/epnode2.epoint@epoint", "hive", "");
+        Connection con = DriverManager.getConnection("jdbc:hive2://epnode1.epoint:2181,epnode2.epoint:2181,epnode3.epoint:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2", "hive", "");
         Statement stmt = con.createStatement();
         ResultSet resultSet= stmt.executeQuery("select * from userinfo");
+        //ResultSet resultSet= stmt.executeQuery("show tables");
         while (resultSet.next()){
             System.out.println(resultSet.getString(1));
         }
-        stmt.execute("insert into  userinfo values('liuwe22222nru','liuwe111111nru')");
+        //stmt.execute("insert into  userinfo values('liuwe22222nru','liuwe111111nru')");
     }
 }
