@@ -25,7 +25,6 @@ public class HbaseAppswithKerberos {
         config.set("hbase.master.kerberos.principal", HBASE_MASTER_PRINCIPAL);
         config.set("hbase.regionserver.kerberos.principal",HBASE_RS_PRINCIPAL);
         UserGroupInformation.setConfiguration(config);
-        //UserGroupInformation.loginUserFromKeytab("hbase-epointhadoop@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/hbase.keytab");
         UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         Connection conn = ConnectionFactory.createConnection(config);
         Table table=conn.getTable(TableName.valueOf("testtable"));

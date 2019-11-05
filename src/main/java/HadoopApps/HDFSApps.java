@@ -23,7 +23,7 @@ public class HDFSApps {
         UserGroupInformation.setConfiguration(conf);
         UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         FileSystem fs=FileSystem.get(conf);
-        fs.copyFromLocalFile(new Path("/home/ijarvis/workspace/javaWorkSpace/intelliq-web/logs/app.log"),new Path("/user/app.log"));
+        fs.copyFromLocalFile(new Path("/home/ijarvis/workspace/javaWorkSpace/intelliq-console/intelliq-console.log"),new Path("/user/app.log"));
         InputStream in=null;
         in=fs.open(new Path(uri));
         IOUtils.copyBytes(in,System.out,4096,false);
