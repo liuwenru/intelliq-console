@@ -183,6 +183,11 @@
 <!--            <systemPath>${project.basedir}/ext-libs/hbase-protocol.jar</systemPath>-->
 <!--        </dependency>-->
         <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.8</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-core</artifactId>
             <version>4.7.0-HBase-1.1</version>
@@ -192,16 +197,10 @@
         <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-client</artifactId>
-<!--            <version>4.14.1-HBase-1.1</version>-->
             <version>4.7.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/ext-libs/phoenix-4.7.0.2.6.5.0-292-client.jar</systemPath>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.sun.jna</groupId>-->
-<!--            <artifactId>jna</artifactId>-->
-<!--            <version>3.0.9</version>-->
-<!--        </dependency>-->
     </dependencies>
     <build>
         <finalName>intelliq-console</finalName>

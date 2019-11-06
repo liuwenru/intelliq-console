@@ -17,6 +17,7 @@ public class HbaseAppswithKerberos {
     private static final String HBASE_RS_PRINCIPAL = "hbase/_HOST@epoint";
     public static void main(String[] args) throws IOException {
         System.setProperty("java.security.krb5.conf","/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/krb5.conf");
+        System.setProperty("java.security.auth.login.config","/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/jaas.conf");
         Configuration config= HBaseConfiguration.create();
         config.set("hbase.zookeeper.quorum","epnode1.epoint,epnode2.epoint,epnode3.epoint");
         config.set("zookeeper.znode.parent", "/hbase-secure");

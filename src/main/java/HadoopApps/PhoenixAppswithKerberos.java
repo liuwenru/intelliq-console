@@ -33,7 +33,7 @@ public class PhoenixAppswithKerberos {
         PreparedStatement statement = conn.prepareStatement("select * from testepoint");
         ResultSet rset = statement.executeQuery();
         while (rset.next()) {
-            System.out.println(rset.getString(2));
+            System.out.println(rset.getString(1));
         }
     }
 }
