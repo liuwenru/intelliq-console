@@ -24,6 +24,15 @@ public class PhoenixAppswithKerberos {
         UserGroupInformation.setConfiguration(config);
         UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         Class.forName("org.apache.phoenix.jdbc.PhoenixDriver");
+        Properties properties=new Properties();
+        properties.setProperty("hbase.zookeeper.quorum", "epnode1.epoint,epnode2.epoint,epnode3.epoint");
+        properties.setProperty("hbase.master.kerberos.principal", HBASE_MASTER_PRINCIPAL);
+        properties.setProperty("hbase.regionserver .kerberos.principal", HBASE_MASTER_PRINCIPAL);
+        properties.setProperty("phoenix.queryserver.kerberos.principal", HBASE_MASTER_PRINCIPAL);
+        properties.setProperty("hbase.security.authentication", "kerberos");
+        properties.setProperty("hadoop.security.authentication", "kerberos");
+        //properties.setProperty("hbase.myclient.keytab", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
+        //Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab",properties);
         Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         Statement stmt = conn.createStatement();
 //        stmt.executeUpdate("create table testepoint (mykey integer not null primary key, mycolumn varchar)");
