@@ -17,17 +17,17 @@ public class HbaseAppswithKerberos {
     private static final String HBASE_RS_PRINCIPAL = "hbase/_HOST@epoint";
 
     public static void main(String[] args) throws IOException {
-        System.setProperty("java.security.krb5.conf","/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/krb5.conf");
+        System.setProperty("java.security.krb5.conf",args[0]);
         //System.setProperty("java.security.auth.login.config","/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/jaas.conf");
         Configuration config= HBaseConfiguration.create();
-        config.set("hbase.zookeeper.quorum","epnode1.epoint,epnode2.epoint,epnode3.epoint");
-        config.set("zookeeper.znode.parent", "/hbase-secure");
+        config.set("hbase.zookeeper.quorum",args[1]);
+        config.set("zookeeper.znode.parent", args[2]);
         config.set("hadoop.security.authentication", "Kerberos");
         config.set("hbase.security.authentication", "kerberos");
-        config.set("hbase.master.kerberos.principal", HBASE_MASTER_PRINCIPAL);
-        config.set("hbase.regionserver.kerberos.principal",HBASE_RS_PRINCIPAL);
+        config.set("hbase.master.kerberos.principal", args[3]);
+        config.set("hbase.regionserver.kerberos.principal",args[3]);
         UserGroupInformation.setConfiguration(config);
-        UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
+        UserGroupInformation.loginUserFromKeytab(args[4], args[5]);
         Connection conn = ConnectionFactory.createConnection(config);
         Table table=conn.getTable(TableName.valueOf("testtable"));
         Put put=new Put(Bytes.toBytes("row3"));

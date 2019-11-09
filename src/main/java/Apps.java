@@ -4,9 +4,7 @@ import org.slf4j.LoggerFactory;
 public class Apps {
     private static Logger logger= LoggerFactory.getLogger(Apps.class);
     public static void main(String[] args){
-        while (true){
-            logger.debug("11111111");
-        }
-
+        logger.debug("这是中文");
+        System.out.print("这是中文");
     }
 }
