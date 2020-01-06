@@ -7,6 +7,7 @@ import org.apache.hadoop.security.UserGroupInformation;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
+import java.util.UUID;
 
 public class PhoenixAppswithKerberos {
     private static final String HBASE_MASTER_PRINCIPAL = "hbase/_HOST@epoint";
@@ -36,9 +37,11 @@ public class PhoenixAppswithKerberos {
         Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab",properties);
         //Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
         Statement stmt = conn.createStatement();
-        stmt.executeUpdate("create table testepoint (mykey integer not null primary key, mycolumn varchar)");
-        stmt.executeUpdate("upsert into testepoint values (1,'Hello')");
-        stmt.executeUpdate("upsert into testepoint values (2,'World!')");
+        //stmt.executeUpdate("create table testepoint (mykey integer not null primary key, mycolumn varchar)");
+        for (int i =0;i<500000;i++){
+            stmt.executeUpdate("upsert into testepoint values ("+i+",'"+ UUID.randomUUID().toString() +"')");
+        }
+        //stmt.executeUpdate("upsert into testepoint values (2,'World!')");
         conn.commit();
         PreparedStatement statement = conn.prepareStatement("select * from testepoint");
         ResultSet rset = statement.executeQuery();

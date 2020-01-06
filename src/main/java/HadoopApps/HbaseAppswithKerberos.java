@@ -30,6 +30,13 @@ public class HbaseAppswithKerberos {
         UserGroupInformation.loginUserFromKeytab(args[4], args[5]);
         Connection conn = ConnectionFactory.createConnection(config);
         Table table=conn.getTable(TableName.valueOf("testtable"));
+        for(int i=0;i<=9;i++){
+            for(int j=0;j<=9;j++){
+                for(int k=0;k<=9;k++){
+
+                }
+            }
+        }
         Put put=new Put(Bytes.toBytes("row3"));
         put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual1"),Bytes.toBytes("val1-ijarvis-epoint-22222newvalue"));
         //put.addColumn(Bytes.toBytes("cf"),Bytes.toBytes("qual2"),Bytes.toBytes("val2-ijarvis"));
