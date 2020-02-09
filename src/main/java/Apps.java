@@ -6,8 +6,20 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Apps {
     private static Logger logger= LoggerFactory.getLogger(Apps.class);
     public static void main(String[] args){
-        logger.debug("这是中文");
-        System.out.print("这是中文");
+        if(true){
+            try {
+                System.out.println("1");
+                return;
+            }catch (Exception e){
+                System.out.println("3");
+            }
+        }
+        try {
+
+        }finally {
+            System.out.println("4");
+        }
+
 
     }
 }
