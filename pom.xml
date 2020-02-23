@@ -22,17 +22,11 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId>-->
-<!--            <artifactId>mysql-connector-java</artifactId>-->
-<!--            <version>5.1.38</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
+            <version>5.1.38</version>
         </dependency>
-
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
@@ -103,20 +97,6 @@
             <systemPath>${project.basedir}/ext-libs/sqljdbc4-4.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.epoint</groupId>
-            <artifactId>sn</artifactId>
-            <version>7.12</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/ext-libs/sn.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>jna</artifactId>
-            <version>3.0.9</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/ext-libs/jna-3.0.9.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.6</version>
@@ -133,6 +113,16 @@
             <version>1.7.13.RELEASE</version>
         </dependency>
         <!--  Hadoop 大数据工具集 -->
+
+        <!-- HDP读写底层文件所需依赖 -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <!-- Hive2 表读写操作所需依赖
+        // problem: https://stackoverflow.com/questions/45440837/unable-to-connect-hive-with-zookeeper-service-discovery-mode-via-jdbc
+        -->
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-jdbc</artifactId>
@@ -158,46 +148,30 @@
             <artifactId>hive-service</artifactId>
             <version>1.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>2.6.5</version>
-        </dependency>
+
+        <!-- Hbase 读写操作所需依赖 -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
             <version>1.3.6</version>
         </dependency>
+        <!-- Phoenix 读写操作所需依赖 -->
         <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>2.5.0</version>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix</artifactId>
+            <version>4.7.0-HBase-1.1</version>
+            <type>pom</type>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.hbase</groupId>-->
-<!--            <artifactId>hbase-protocol</artifactId>-->
-<!--            <version>2.2.1</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/ext-libs/hbase-protocol.jar</systemPath>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.zookeeper</groupId>-->
-<!--            <artifactId>zookeeper</artifactId>-->
-<!--            <version>3.4.8</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-core</artifactId>
             <version>4.7.0-HBase-1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/ext-libs/phoenix-core-4.7.0.2.6.5.0-292.jar</systemPath>
         </dependency>
+        <!-- Presto 读写操作所需的依赖 -->
         <dependency>
-            <groupId>org.apache.phoenix</groupId>
-            <artifactId>phoenix-client</artifactId>
-            <version>4.7.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/ext-libs/phoenix-4.7.0.2.6.5.0-292-client.jar</systemPath>
+            <groupId>com.facebook.presto</groupId>
+            <artifactId>presto-jdbc</artifactId>
+            <version>0.210</version>
         </dependency>
     </dependencies>
     <build>

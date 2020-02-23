@@ -13,7 +13,7 @@ public class PhoenixAppswithKerberos {
     private static final String HBASE_MASTER_PRINCIPAL = "hbase/_HOST@epoint";
     private static final String HBASE_RS_PRINCIPAL = "hbase/_HOST@epoint";
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-        System.setProperty("java.security.krb5.conf","/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/krb5.conf");
+        System.setProperty("java.security.krb5.conf","src/main/resources/krb5.conf");
         Configuration config= HBaseConfiguration.create();
         config.set("hbase.zookeeper.quorum","epnode1.epoint,epnode2.epoint,epnode3.epoint");
         config.set("zookeeper.znode.parent", "/hbase-secure");
@@ -24,7 +24,7 @@ public class PhoenixAppswithKerberos {
         config.set("hadoop.security.authentication", "Kerberos");
         config.set("hadoop.rpc.protection", "privacy");
         UserGroupInformation.setConfiguration(config);
-        UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
+        UserGroupInformation.loginUserFromKeytab("hdfs@epoint", "src/main/resources/client_hdfs.keytab");
         Class.forName("org.apache.phoenix.jdbc.PhoenixDriver");
         Properties properties=new Properties();
         properties.setProperty("hbase.zookeeper.quorum", "epnode1.epoint,epnode2.epoint,epnode3.epoint");
@@ -34,8 +34,8 @@ public class PhoenixAppswithKerberos {
         properties.setProperty("hbase.security.authentication", "kerberos");
         properties.setProperty("hadoop.security.authentication", "kerberos");
         properties.setProperty("zookeeper.znode.parent", "/hbase-secure");
-        Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab",properties);
-        //Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/client_hdfs.keytab");
+        Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:src/main/resources/client_hdfs.keytab",properties);
+        //Connection conn = DriverManager.getConnection("jdbc:phoenix:epnode1.epoint:2181:/hbase-secure:hdfs@epoint:src/main/resources/client_hdfs.keytab");
         Statement stmt = conn.createStatement();
         //stmt.executeUpdate("create table testepoint (mykey integer not null primary key, mycolumn varchar)");
         for (int i =0;i<500000;i++){

@@ -20,14 +20,14 @@ public class App_withssl {
     public static void  main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException, TimeoutException {
         char[] keyPassphrase = "p@ssw0rd".toCharArray();
         KeyStore ks = KeyStore.getInstance("PKCS12");
-        ks.load(new FileInputStream("/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/epoint_rabbitmqssl/rabbitmq-epointclient.keycert.p12"), keyPassphrase);
+        ks.load(new FileInputStream("src/main/resources/epoint_rabbitmqssl/rabbitmq-epointclient.keycert.p12"), keyPassphrase);
 
         KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
         kmf.init(ks, keyPassphrase);
 
         char[] trustPassphrase = "p@ssw0rd".toCharArray();
         KeyStore tks = KeyStore.getInstance("JKS");
-        tks.load(new FileInputStream("/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/epoint_rabbitmqssl/rabbitmq.store"), trustPassphrase);
+        tks.load(new FileInputStream("src/main/resources/epoint_rabbitmqssl/rabbitmq.store"), trustPassphrase);
 
         TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
         tmf.init(tks);

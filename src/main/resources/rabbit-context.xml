@@ -20,7 +20,7 @@
         <bean id="clientConnectionFactory"
               class="org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean">
             <property name="useSSL" value="true" />
-            <property name="sslPropertiesLocation" value="file:/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/rabbitSSL.properties"/>
+            <property name="sslPropertiesLocation" value="file:src/main/resources/rabbitSSL.properties"/>
         </bean>
         <rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"/>
         <rabbit:admin connection-factory="rabbitConnectionFactory"/>

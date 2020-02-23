@@ -18,7 +18,7 @@ public class HbaseAppswithKerberos {
 
     public static void main(String[] args) throws IOException {
         System.setProperty("java.security.krb5.conf",args[0]);
-        //System.setProperty("java.security.auth.login.config","/home/ijarvis/workspace/javaWorkSpace/intelliq-console/src/main/resources/jaas.conf");
+        //System.setProperty("java.security.auth.login.config","src/main/resources/jaas.conf");
         Configuration config= HBaseConfiguration.create();
         config.set("hbase.zookeeper.quorum",args[1]);
         config.set("zookeeper.znode.parent", args[2]);
