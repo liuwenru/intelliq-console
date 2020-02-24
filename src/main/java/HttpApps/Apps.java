@@ -9,11 +9,15 @@ import java.io.*;
 
 public class Apps {
 
-    private static String url = "http://mail.epoint.com.cn:6080/";
+    private static String url = "https://www.baidu.com";
 
     public static void main(String[] args) {
         // Create an instance of HttpClient.
         HttpClient client = new HttpClient();
+
+
+        HostConfiguration config = client.getHostConfiguration();
+        config.setProxy("192.168.1.230",3228);
         client.getParams().setParameter("http.protocol.version", HttpVersion.HTTP_1_0);
         // Create a method instance.
         PostMethod method = new PostMethod(url);

@@ -173,6 +173,16 @@
             <artifactId>presto-jdbc</artifactId>
             <version>0.210</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.9</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>intelliq-console</finalName>
@@ -243,7 +253,7 @@
                             </filters>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>FileApps.Java2wt</mainClass>
+                                    <mainClass>HttpApps.Apps</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
