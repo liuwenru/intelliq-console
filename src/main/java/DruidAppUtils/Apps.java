@@ -15,7 +15,7 @@ public class Apps {
     private static DataSource dataSource ;
 
     public static void main(String[] args) throws Exception {
-        context=new ClassPathXmlApplicationContext("file://src/main/resources/application-context.xml");
+        context=new ClassPathXmlApplicationContext("file:///Users/ijarvis/workspace/javaworkspace/intelliq-console/src/main/resources/application-context.xml");
         dataSource=context.getBean("dataSource", DruidDataSource.class);
 //        int size=50;
 //        Threadepoint[] threadepoints=new Threadepoint[size];
@@ -33,6 +33,8 @@ public class Apps {
             while (resultSet.next()) {
                 System.out.println(resultSet.getString(1));
             }
+
+            Thread.sleep(5*1000);
         }
     }
 
