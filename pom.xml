@@ -193,6 +193,16 @@
             <artifactId>netty</artifactId>
             <version>3.7.0.Final</version>
         </dependency>
+        <dependency>
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>2.14.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.6</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>intelliq-console</finalName>
@@ -263,7 +273,7 @@
                             </filters>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>FileApps.FileDeleteApps</mainClass>
+                                    <mainClass>WrapperServiceUtils.Apps</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
