@@ -48,3 +48,6 @@ bin/
 
 
 dependency-reduced-pom.xml
+
+.factorypath
+
