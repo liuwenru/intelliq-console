@@ -4,6 +4,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -18,6 +19,7 @@ public class Apps {
     public static void main(String[] args) throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException, IOException, TimeoutException {
         // arg0  amqp://epoint:epoint@192.168.188.150
         // arg1  QUEUE_NAME
+        new String();
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUri(args[0]);
         QUEUE_NAME=args[1];
