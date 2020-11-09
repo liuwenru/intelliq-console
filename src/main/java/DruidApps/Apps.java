@@ -45,7 +45,7 @@ public class Apps {
         connection.close();
         System.out.println("Stage 1 ...................");
 
-
+        Thread.sleep(100*1000);
         //connection.createStatement().executeQuery("select 1");
 
 
