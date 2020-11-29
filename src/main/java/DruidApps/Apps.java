@@ -5,16 +5,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Apps {
     public static void main(String[] args) throws SQLException, InterruptedException {
         ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("application-context.xml");
         DataSource dataSource=(DataSource) context.getBean("dataSource");
-
-
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -42,10 +38,21 @@ public class Apps {
         Connection connection=dataSource.getConnection();
 
 
-        connection.close();
+        //connection.close();
         System.out.println("Stage 1 ...................");
+        String SQLQUERY="insert into t1 values(?)";
+        PreparedStatement preparedStatement= connection.prepareStatement(SQLQUERY);
+        for(int i=0;i<5;i++){
+            preparedStatement.setString(1,i+"");
+            preparedStatement.addBatch();
+        }
+        preparedStatement.executeBatch();
 
-        Thread.sleep(100*1000);
+//        Statement cmd=connection.createStatement();
+//        for(int i=0;i<5;i++){
+//            cmd.addBatch("insert into t1 values("+i+")");
+//        }
+//        cmd.executeBatch();
         //connection.createStatement().executeQuery("select 1");
 
 
@@ -64,8 +71,5 @@ public class Apps {
 //        }
 
         System.out.println("Stage 5 ...................");
-
-
-
     }
 }
