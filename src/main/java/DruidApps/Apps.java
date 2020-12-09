@@ -40,7 +40,7 @@ public class Apps {
 
         //connection.close();
         System.out.println("Stage 1 ...................");
-        String SQLQUERY="insert into t1 values(2)";
+        String SQLQUERY="insert into t1 values(3)";
         connection.createStatement().execute(SQLQUERY);
         connection.commit();
 
