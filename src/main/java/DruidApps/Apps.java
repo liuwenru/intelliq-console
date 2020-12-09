@@ -40,13 +40,9 @@ public class Apps {
 
         //connection.close();
         System.out.println("Stage 1 ...................");
-        String SQLQUERY="insert into t1 values(?)";
-        PreparedStatement preparedStatement= connection.prepareStatement(SQLQUERY);
-        for(int i=0;i<5;i++){
-            preparedStatement.setString(1,i+"");
-            preparedStatement.addBatch();
-        }
-        preparedStatement.executeBatch();
+        String SQLQUERY="insert into t1 values(2)";
+        connection.createStatement().execute(SQLQUERY);
+        connection.commit();
 
 //        Statement cmd=connection.createStatement();
 //        for(int i=0;i<5;i++){
