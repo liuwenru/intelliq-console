@@ -19,7 +19,7 @@ public class J2DApps {
         image=g2d.getDeviceConfiguration().createCompatibleImage(with,hight,3);
         g2d.dispose();
         g2d=image.createGraphics();
-        g2d.setColor(new Color(10));
+        g2d.setColor(new Color(0x2D323C));
         g2d.setStroke(new BasicStroke(1.0F));
         FontRenderContext context=g2d.getFontRenderContext();
         Rectangle2D bounds=font.getStringBounds(args[0],context);

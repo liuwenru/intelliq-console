@@ -7,7 +7,7 @@
     <artifactId>intelliq-console</artifactId>
     <version>1.0</version>
     <properties>
-        <spring.version>5.2.12.RELEASE</spring.version>
+        <spring.version>4.3.9.RELEASE</spring.version>
     </properties>
     <dependencies>
         <dependency>
