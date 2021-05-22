@@ -6,11 +6,7 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.MemoryUsage;
-import java.net.MalformedURLException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class EpointTomcatApps {
@@ -39,54 +35,54 @@ public class EpointTomcatApps {
         }
 
         ObjectName heapObjName = new ObjectName("java.lang:type=Memory");
-        MemoryUsage heapMemoryUsage = MemoryUsage.from((CompositeDataSupport) mbsc.getAttribute(heapObjName,"HeapMemoryUsage"));
+        MemoryUsage heapMemoryUsage = MemoryUsage.from((CompositeDataSupport) mbsc.getAttribute(heapObjName, "HeapMemoryUsage"));
 
         // $(UUID).tomcat.mem.alloc
-        long allocMb=heapMemoryUsage.getCommitted()/1024/1024;
-        System.out.println("tomcat.mem.alloc"+ allocMb);
+        long allocMb = heapMemoryUsage.getCommitted() / 1024 / 1024;
+        System.out.println("tomcat.mem.alloc" + allocMb);
         // $(UUID).tomcat.mem.alloc.free
-        long freeMb=(heapMemoryUsage.getCommitted()/1024/1024)-(heapMemoryUsage.getUsed()/1024/1024);
-        System.out.println("tomcat.mem.alloc.free"+ freeMb);
+        long freeMb = (heapMemoryUsage.getCommitted() / 1024 / 1024) - (heapMemoryUsage.getUsed() / 1024 / 1024);
+        System.out.println("tomcat.mem.alloc.free" + freeMb);
         // $(UUID).tomcat.mem.max
-        long MaxMb=heapMemoryUsage.getMax()/1024/1024;
-        System.out.println("tomcat.mem.max"+ MaxMb);
+        long MaxMb = heapMemoryUsage.getMax() / 1024 / 1024;
+        System.out.println("tomcat.mem.max" + MaxMb);
 
         // tomcat.handled.time.max Catalina:name="http-nio-8080",type=GlobalRequestProcessor
         ObjectName handledMaxtimeObjName = new ObjectName("Catalina:name=\"http-nio-8080\",type=GlobalRequestProcessor");
-        System.out.println("tomcat.handled.time.max:" +  mbsc.getAttribute(handledMaxtimeObjName, "maxTime"));
+        System.out.println("tomcat.handled.time.max:" + mbsc.getAttribute(handledMaxtimeObjName, "maxTime"));
 
 
         // tomcat.handled.time.avg Catalina:type=ThreadPool,name="http-nio-8080"
         ObjectName handledAvgtimeObjName = new ObjectName("Catalina:name=\"http-nio-8080\",type=GlobalRequestProcessor");
-        System.out.println("tomcat.handled.time.avg:" +  mbsc.getAttribute(handledMaxtimeObjName, "processingTime"));
+        System.out.println("tomcat.handled.time.avg:" + mbsc.getAttribute(handledMaxtimeObjName, "processingTime"));
 
         // tomcat.network.recv
         ObjectName recvObjName = new ObjectName("Catalina:name=\"http-nio-8080\",type=GlobalRequestProcessor");
-        System.out.println("tomcat.network.recv:" +  mbsc.getAttribute(handledMaxtimeObjName, "bytesReceived"));
+        System.out.println("tomcat.network.recv:" + mbsc.getAttribute(handledMaxtimeObjName, "bytesReceived"));
 
         // tomcat.network.send
         ObjectName sendObjName = new ObjectName("Catalina:name=\"http-nio-8080\",type=GlobalRequestProcessor");
-        System.out.println("tomcat.network.recv:" +  mbsc.getAttribute(handledMaxtimeObjName, "bytesSent"));
+        System.out.println("tomcat.network.recv:" + mbsc.getAttribute(handledMaxtimeObjName, "bytesSent"));
 
         // tomcat.request.num
         ObjectName srequest_numObjName = new ObjectName("Catalina:name=\"http-nio-8080\",type=GlobalRequestProcessor");
-        System.out.println("tomcat.request.num:" +  mbsc.getAttribute(handledMaxtimeObjName, "requestCount"));
+        System.out.println("tomcat.request.num:" + mbsc.getAttribute(handledMaxtimeObjName, "requestCount"));
 
         // tomcat.request.err
         ObjectName request_errObjName = new ObjectName("Catalina:name=\"http-nio-8080\",type=GlobalRequestProcessor");
-        System.out.println("tomcat.request.err:" +  mbsc.getAttribute(handledMaxtimeObjName, "errorCount"));
+        System.out.println("tomcat.request.err:" + mbsc.getAttribute(handledMaxtimeObjName, "errorCount"));
 
         // tomcat.process.thread.max
         ObjectName thread_maxObjName = new ObjectName("Catalina:type=ThreadPool,name=\"http-nio-8080\"");
-        System.out.println("tomcat.process.thread.max:" +  mbsc.getAttribute(thread_maxObjName, "maxThreads"));
+        System.out.println("tomcat.process.thread.max:" + mbsc.getAttribute(thread_maxObjName, "maxThreads"));
 
         // tomcat.process.thread.now
         ObjectName thread_nowObjName = new ObjectName("Catalina:type=ThreadPool,name=\"http-nio-8080\"");
-        System.out.println("tomcat.process.thread.now:" +  mbsc.getAttribute(thread_nowObjName, "currentThreadCount"));
+        System.out.println("tomcat.process.thread.now:" + mbsc.getAttribute(thread_nowObjName, "currentThreadCount"));
 
         // tomcat.process.thread.busy
         ObjectName thread_busyObjName = new ObjectName("Catalina:type=ThreadPool,name=\"http-nio-8080\"");
-        System.out.println("tomcat.process.thread.busy:" +  mbsc.getAttribute(thread_busyObjName, "currentThreadsBusy"));
+        System.out.println("tomcat.process.thread.busy:" + mbsc.getAttribute(thread_busyObjName, "currentThreadsBusy"));
 
         connector.close();
     }

@@ -17,7 +17,7 @@ public class Apps {
             JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
 
             Map map = new HashMap();
-            String[] credentials = new String[] { "monitorRole", "QED" };
+            String[] credentials = new String[]{"monitorRole", "QED"};
             map.put("jmx.remote.credentials", credentials);
             JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
             MBeanServerConnection mbsc = connector.getMBeanServerConnection();

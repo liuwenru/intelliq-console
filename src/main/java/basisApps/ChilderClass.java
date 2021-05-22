@@ -7,7 +7,7 @@ public class ChilderClass extends ParentClass {
     }
 
     public static void main(String[] args) {
-        ParentClass parentClass=new ChilderClass();
+        ParentClass parentClass = new ChilderClass();
         parentClass.m1();
     }
 }

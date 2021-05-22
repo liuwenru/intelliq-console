@@ -50,18 +50,17 @@
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.oracle</groupId>-->
-<!--            <artifactId>ojdbc</artifactId>-->
-<!--            <version>7.12</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/ext-libs/ojdbc7-12.1.0.jar</systemPath>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle</groupId>-->
+        <!--            <artifactId>ojdbc</artifactId>-->
+        <!--            <version>7.12</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/ext-libs/ojdbc7-12.1.0.jar</systemPath>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.6</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
@@ -93,7 +92,6 @@
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
             <version>3.6.2</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>
@@ -111,6 +109,76 @@
                     <encoding>UTF-8</encoding>
                     <compilerArgument>-g</compilerArgument>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <!--							参与过滤的包名称，没有实践过，所以不测试  配置格式：groupId:artifactId[[:type]:classifier]  支持通配符  -->
+                            <!--							<artifactSet>-->
+                            <!--								<excludes>-->
+                            <!--									<exclude>classworlds:classworlds</exclude>-->
+                            <!--									<exclude>junit:junit</exclude>-->
+                            <!--									<exclude>jmock:*</exclude>-->
+                            <!--									<exclude>*:xml-apis</exclude>-->
+                            <!--									<exclude>org.apache.maven:lib:tests</exclude>-->
+                            <!--									<exclude>log4j:log4j:jar:</exclude>-->
+                            <!--								</excludes>-->
+                            <!--							</artifactSet>-->
+                            <!--                            类重定位-->
+                            <!--                            官网是“Relocating Classes”，如果一个uber-jar会被其他项目引用，uber-jar中依赖的类可能会导致类定位-->
+                            <!--                            冲突（由于不同版本的jar包引起）， 我们可以通过shade插件来将被隐藏的类重定位以使该类只在该uber-jar中-->
+                            <!--                            使用，这种方式也经常被用来解决jar包冲突问题。下面的例子是让org.codehaus.plexus.util包和它的子包-->
+                            <!--                            移动到 org.shaded.plexus.util包中，而类Xpp3Dom和其他的一些则保留在原来的package中-->
+                            <!--                            <relocations>-->
+                            <!--                                <relocation>-->
+                            <!--                                    <pattern>org.codehaus.plexus.util</pattern>-->
+                            <!--                                    <shadedPattern>org.shaded.plexus.util</shadedPattern>-->
+                            <!--                                    <excludes>-->
+                            <!--                                        <exclude>org.codehaus.plexus.util.xml.Xpp3Dom</exclude>-->
+                            <!--                                        <exclude>org.codehaus.plexus.util.xml.pull.*</exclude>-->
+                            <!--                                    </excludes>-->
+                            <!--                                </relocation>-->
+                            <!--                            </relocations>-->
+                            <filters>
+                                <!-- 添加过滤器，让那些包打包的时候排除出去 -->
+                                <!--								<filter>-->
+                                <!--									<artifact>junit:junit</artifact>-->
+                                <!--									<includes>-->
+                                <!--										<include>junit/framework/**</include>-->
+                                <!--										<include>org/junit/**</include>-->
+                                <!--									</includes>-->
+                                <!--									<excludes>-->
+                                <!--										<exclude>org/junit/experimental/**</exclude>-->
+                                <!--										<exclude>org/junit/runners/**</exclude>-->
+                                <!--									</excludes>-->
+                                <!--								</filter>-->
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>Apps</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

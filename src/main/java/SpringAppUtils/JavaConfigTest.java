@@ -9,11 +9,11 @@ public class JavaConfigTest {
 
 
     public static void main(String[] args) {
-        JavaConfigTest javaConfigTest=new JavaConfigTest();
+        JavaConfigTest javaConfigTest = new JavaConfigTest();
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.register(Apps.class,JavaConfigTest.class);
+        ctx.register(Apps.class, JavaConfigTest.class);
         ctx.refresh();
-        Apps a=(Apps)ctx.getBean("getapps");
+        Apps a = (Apps) ctx.getBean("getapps");
         a.fprint();
     }
 }

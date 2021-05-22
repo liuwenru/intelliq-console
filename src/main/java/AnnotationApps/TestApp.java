@@ -12,7 +12,7 @@ public class TestApp {
         // 获取需要处理的方法Method实例
         Method method = c.getMethod("execute", new Class[]{});
         // 判断该方法是否包含MyAnnotation注解
-        if(method.isAnnotationPresent(MyAnnotation.class)){
+        if (method.isAnnotationPresent(MyAnnotation.class)) {
             // 获取该方法的MyAnnotation注解实例
             MyAnnotation myAnnotation = method.getAnnotation(MyAnnotation.class);
             // 执行该方法
@@ -25,7 +25,7 @@ public class TestApp {
         }
         // 获取方法上的所有注解
         Annotation[] annotations = method.getAnnotations();
-        for(Annotation annotation : annotations){
+        for (Annotation annotation : annotations) {
             System.out.println(annotation);
         }
     }
