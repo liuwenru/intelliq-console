@@ -19,7 +19,7 @@ public class Apps {
         preparedStatement.setString(1,args[0]);
         ResultSet resultSet= preparedStatement.executeQuery();
         while (resultSet.next()){
-            logger.debug("  ----      %s  - %s - %s - %s  ---- ",
+            logger.debug("  ----      {}  - {} - {} - {}  ---- ",
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),

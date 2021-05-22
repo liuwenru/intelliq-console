@@ -121,7 +121,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
+<!--                            <minimizeJar>true</minimizeJar>-->
                             <!--							参与过滤的包名称，没有实践过，所以不测试  配置格式：groupId:artifactId[[:type]:classifier]  支持通配符  -->
                             <!--							<artifactSet>-->
                             <!--								<excludes>-->

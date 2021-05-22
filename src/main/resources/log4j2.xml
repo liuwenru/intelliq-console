@@ -11,7 +11,7 @@
     <Appenders>
         <!-- 定义输出到屏幕 -->
         <Console name="console" target="SYSTEM_OUT">
-            <!-- 日志格式引用上面定义的log.pax           ttern -->
+            <!-- 日志格式引用上面定义的log.paxttern -->
             <PatternLayout pattern="${log.pattern}"/>
         </Console>
         <!-- 定义输出到文件,文件名引用上面定义的file.err.filename -->
@@ -26,7 +26,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <Root level="debug">
             <!-- 对info级别的日志，输出到console -->
             <AppenderRef ref="console" level="debug"/>
             <!-- 对error级别的日志，输出到err，即上面定义的RollingFile -->
