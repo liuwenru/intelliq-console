@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--        <property name="url" value="jdbc:sqlserver://192.168.212.243:1433;databaseName=EpointSJ;encrypt=true;trustServerCertificate=true" />-->
+        <!--        <property name="url" value="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.189.215)(PORT=1521))(FAILOVER=on)(LOAD_BALANCE=on))(CONNECT_DATA= (SERVICE_NAME=orcl)))" />-->
+        <!--            <property name="url" value="jdbc:mysql://192.168.188.182:3306/employees?useSSL=false&amp;rewriteBatchedStatements=true"/>-->
+        <!--        <property name="url" value="jdbc:mysql://192.168.188.154:3306/employees?useSSL=true&amp;rewriteBatchedStatements=true&amp;verifyServerCertificate=false"/>-->
+        <property name="url" value="jdbc:mysql://192.168.188.154:3306/employees?useSSL=true"/>
+        <property name="username" value="eproot"/>
+        <property name="password" value="Infra5@Gep0int"/>
+        <!--        <property name="filters" value="stat" />-->
+        <!--                <property name="testWhileIdle" value="true" />-->
+        <!--                <property name="testOnBorrow" value="true" />-->
+        <property name="testOnReturn" value="false"/>
+        <!--                <property name="removeAbandonedTimeoutMillis" value="180000" />-->
+        <!--                <property name="removeAbandoned" value="true" />-->
+        <property name="maxWait" value="550"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="maxActive" value="300"/>
+        <!--        <property name="dbType" value = "sqlserver" />-->
+        <property name="defaultAutoCommit" value="false"/>
+        <!--        <property name="asyncInit" value="true"/>-->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+    </bean>
+</beans>
