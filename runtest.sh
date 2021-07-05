@@ -14,9 +14,9 @@ java -jar -Xmx20G \
 -Xloggc:gc.log \
 -XX:+UnlockDiagnosticVMOptions \
 -XX:+UseGCLogFileRotation \
--XX:GCLogFileSize=1m \
+-XX:GCLogFileSize=512m \
 -XX:NumberOfGCLogFiles=2 \
--XX:-OmitStackTraceInFastThrow \
 -XX:+PrintGCApplicationStoppedTime \
 -XX:+PrintGCApplicationConcurrentTime \
+-XX:-OmitStackTraceInFastThrow \
 target/intelliq-console.jar
